@@ -17,7 +17,7 @@ public class ConexaoBanco {
     //driver, DRIVER = banco de dados, URL referente ao caminho
     public Connection getConexao() {
         final String DRIVER = "com.mysql.jdbc.Driver";
-        final String URL = "jdbc:mysql://localhost:3306/atendimento";
+        final String URL = "jdbc:mysql://localhost:3306/prbancodigital";
 
         // tenta a conexao, root e root como usuário e senha   
         try {
