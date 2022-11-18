@@ -65,7 +65,7 @@ public class FLogin extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setText("Crirar conta");
+        jButton2.setText("Criar conta");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
