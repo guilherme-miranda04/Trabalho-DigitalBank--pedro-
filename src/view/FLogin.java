@@ -137,30 +137,28 @@ public class FLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotaoEntrarActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jBotaoEntrarActionPerformed
 
     private void jTextCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCpfActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextCpfActionPerformed
 
     private void jTextSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSenhaActionPerformed
-        // TODO add your handling code here:
+        
     }//GEN-LAST:event_jTextSenhaActionPerformed
 
     private void jBotaoCriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotaoCriarContaActionPerformed
-        // TODO add your handling code here:
+        // Associação a view de Cadastrar Conta 
+       
+        FCadastroConta ViewCadConta = new FCadastroConta();
+        ViewCadConta.setVisible(true);
+        dispose();
     }//GEN-LAST:event_jBotaoCriarContaActionPerformed
 
     private void jBotaoEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBotaoEntrarMouseClicked
-        
-            // Falta fazer o mecanismo de verificar a senha...
-
-    if (form_principal == null){
-            form_principal = new FPrincipal();
-        }
-        
-       form_principal.setVisible(true);                            
+        // Criar mecanismo de verificação de senha
+                           
     }//GEN-LAST:event_jBotaoEntrarMouseClicked
 
     /**
