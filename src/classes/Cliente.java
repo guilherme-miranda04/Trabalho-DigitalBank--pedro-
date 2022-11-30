@@ -5,10 +5,7 @@ import java.util.ArrayList;
 import java.text.DateFormat;  
 import java.text.SimpleDateFormat;  
 import java.util.Calendar;  
-/**
- *
- * @author guilherme.miranda1
- */
+
 public class Cliente {
 
     private int id;
@@ -29,6 +26,10 @@ public class Cliente {
         this.endereco = endereco;
         this.dataNasc = dataNasc;
         this.renda = renda;
+    }
+
+    public Cliente(int aInt, String string, String string0, String string1, String string2, String string3, float aFloat, String string4, String string5, int aInt0, int aInt1) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
   
