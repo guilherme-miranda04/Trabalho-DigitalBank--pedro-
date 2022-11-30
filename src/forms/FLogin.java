@@ -134,7 +134,6 @@ public class FLogin extends javax.swing.JFrame {
         jTextCpf.getAccessibleContext().setAccessibleName("");
 
         pack();
-        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotaoEntrarActionPerformed
