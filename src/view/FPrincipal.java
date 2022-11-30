@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package forms;
+package view;
 
 /**
  *
@@ -175,7 +175,6 @@ public class FPrincipal extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setFocusCycleRoot(false);
         setMinimumSize(new java.awt.Dimension(395, 600));
-        setPreferredSize(new java.awt.Dimension(395, 600));
         setSize(new java.awt.Dimension(395, 600));
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo atual da Conta"));
