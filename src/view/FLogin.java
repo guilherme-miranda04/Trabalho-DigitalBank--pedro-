@@ -29,61 +29,61 @@ public class FLogin extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jBotaoEntrar = new javax.swing.JButton();
-        jTextCpf = new javax.swing.JFormattedTextField();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jTextSenha = new javax.swing.JPasswordField();
-        jBotaoCriarConta = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
+        jBotLEntrar = new javax.swing.JButton();
+        jCampoLCPF = new javax.swing.JFormattedTextField();
+        jTxtLCPF = new javax.swing.JLabel();
+        jTxtLSenha = new javax.swing.JLabel();
+        jCampoLSenha = new javax.swing.JPasswordField();
+        jBotLCConta = new javax.swing.JButton();
+        jTxtLLogo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setSize(new java.awt.Dimension(390, 600));
 
-        jBotaoEntrar.setText("Entrar");
-        jBotaoEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
+        jBotLEntrar.setText("Entrar");
+        jBotLEntrar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jBotaoEntrarMouseClicked(evt);
+                jBotLEntrarMouseClicked(evt);
             }
         });
-        jBotaoEntrar.addActionListener(new java.awt.event.ActionListener() {
+        jBotLEntrar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotaoEntrarActionPerformed(evt);
+                jBotLEntrarActionPerformed(evt);
             }
         });
 
         try {
-            jTextCpf.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+            jCampoLCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
-        jTextCpf.addActionListener(new java.awt.event.ActionListener() {
+        jCampoLCPF.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextCpfActionPerformed(evt);
+                jCampoLCPFActionPerformed(evt);
             }
         });
 
-        jLabel1.setText("CPF:");
+        jTxtLCPF.setText("CPF:");
 
-        jLabel2.setText("Senha:");
+        jTxtLSenha.setText("Senha:");
 
-        jTextSenha.addActionListener(new java.awt.event.ActionListener() {
+        jCampoLSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextSenhaActionPerformed(evt);
+                jCampoLSenhaActionPerformed(evt);
             }
         });
 
-        jBotaoCriarConta.setText("Criar conta");
-        jBotaoCriarConta.addActionListener(new java.awt.event.ActionListener() {
+        jBotLCConta.setText("Criar conta");
+        jBotLCConta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jBotaoCriarContaActionPerformed(evt);
+                jBotLCContaActionPerformed(evt);
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Vladimir Script", 0, 48)); // NOI18N
-        jLabel3.setText("Atlantis");
+        jTxtLLogo.setFont(new java.awt.Font("Vladimir Script", 0, 48)); // NOI18N
+        jTxtLLogo.setText("Atlantis");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -94,72 +94,72 @@ public class FLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2))
+                            .addComponent(jTxtLCPF)
+                            .addComponent(jTxtLSenha))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextCpf, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(jCampoLCPF, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jCampoLSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(143, 143, 143)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBotaoCriarConta, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBotaoEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addComponent(jBotLCConta, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBotLEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(65, 65, 65))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(131, 131, 131)
-                .addComponent(jLabel3)
+                .addComponent(jTxtLLogo)
                 .addGap(130, 130, 130))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(92, 92, 92)
-                .addComponent(jLabel3)
+                .addComponent(jTxtLLogo)
                 .addGap(84, 84, 84)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextCpf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jCampoLCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtLCPF))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jTextSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
+                    .addComponent(jCampoLSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTxtLSenha))
                 .addGap(62, 62, 62)
-                .addComponent(jBotaoEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jBotLEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
-                .addComponent(jBotaoCriarConta)
+                .addComponent(jBotLCConta)
                 .addGap(145, 145, 145))
         );
 
-        jTextCpf.getAccessibleContext().setAccessibleName("");
+        jCampoLCPF.getAccessibleContext().setAccessibleName("");
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jBotaoEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotaoEntrarActionPerformed
+    private void jBotLEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotLEntrarActionPerformed
         
-    }//GEN-LAST:event_jBotaoEntrarActionPerformed
+    }//GEN-LAST:event_jBotLEntrarActionPerformed
 
-    private void jTextCpfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextCpfActionPerformed
+    private void jCampoLCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoLCPFActionPerformed
         
-    }//GEN-LAST:event_jTextCpfActionPerformed
+    }//GEN-LAST:event_jCampoLCPFActionPerformed
 
-    private void jTextSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextSenhaActionPerformed
+    private void jCampoLSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoLSenhaActionPerformed
         
-    }//GEN-LAST:event_jTextSenhaActionPerformed
+    }//GEN-LAST:event_jCampoLSenhaActionPerformed
 
-    private void jBotaoCriarContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotaoCriarContaActionPerformed
+    private void jBotLCContaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotLCContaActionPerformed
         // Associação a view de Cadastrar Conta 
        
         FCadastroConta ViewCadConta = new FCadastroConta();
         ViewCadConta.setVisible(true);
         dispose();
-    }//GEN-LAST:event_jBotaoCriarContaActionPerformed
+    }//GEN-LAST:event_jBotLCContaActionPerformed
 
-    private void jBotaoEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBotaoEntrarMouseClicked
+    private void jBotLEntrarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jBotLEntrarMouseClicked
         // Criar mecanismo de verificação de senha
                            
-    }//GEN-LAST:event_jBotaoEntrarMouseClicked
+    }//GEN-LAST:event_jBotLEntrarMouseClicked
 
     /**
      * @param args the command line arguments
@@ -197,12 +197,12 @@ public class FLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBotaoCriarConta;
-    private javax.swing.JButton jBotaoEntrar;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JFormattedTextField jTextCpf;
-    private javax.swing.JPasswordField jTextSenha;
+    private javax.swing.JButton jBotLCConta;
+    private javax.swing.JButton jBotLEntrar;
+    private javax.swing.JFormattedTextField jCampoLCPF;
+    private javax.swing.JPasswordField jCampoLSenha;
+    private javax.swing.JLabel jTxtLCPF;
+    private javax.swing.JLabel jTxtLLogo;
+    private javax.swing.JLabel jTxtLSenha;
     // End of variables declaration//GEN-END:variables
 }

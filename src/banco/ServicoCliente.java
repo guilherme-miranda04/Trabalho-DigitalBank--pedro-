@@ -8,32 +8,35 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import classes.Cliente;
 import classes.Endereco;
+import classes.Movimentacao;
+import java.sql.Date;
 
 
 public class ServicoCliente {
 
     private final ConexaoBanco conexao = new ConexaoBanco();
     private Endereco endereco = new Endereco();
-    private Cliente dadosB = new Cliente();
+    private Cliente cliente = new Cliente();
 
-    public void insert(Pessoa cliente) throws SQLException {
-        try (PreparedStatement pst = conexao.getConexao().prepareStatement("insert into cliente (ID, nome, telefone, cpf, dataNasc, email,"
-                + "renda, sexo, senha, ENDERECO_ID, DADOS_BANCO_ID) values "
+    public void insert(Cliente cliente) throws SQLException {
+        try (PreparedStatement pst = conexao.getConexao().prepareStatement("insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email,"
+                + " senha, ENDERECO_ID) values "
                 + "(0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
             pst.setString(1, cliente.getNome());
-            pst.setString(2, cliente.getTelefone());
-            pst.setString(3, cliente.getCpf());
-            pst.setDate(4, cliente.getDataNasc());
-            pst.setString(5, cliente.getEmail());
-            pst.setFloat(6, cliente.getRenda());
-            pst.setString(7, cliente.getSexo());
-            pst.setString(8, cliente.getSenha());
-            pst.setInt(9, endereco.getId());
-            pst.setInt(10, dadosB.getId());
-     
+            pst.setString(2, cliente.getCpf());
+            pst.setDate(3, cliente.getDataNasc());
+            pst.setString(4, cliente.getSexo());
+            pst.setString(5, cliente.getTelefone());
+            pst.setString(6, cliente.getEmail());
+            pst.setString(7, cliente.getSenha());
+            pst.setInt(8, endereco.getId());
+            
             pst.executeUpdate();
+            conexao.close();
         }
-        conexao.close();
+           catch (SQLException e) {
+               e.printStackTrace();
+           }
     }
 
     public Pessoa select(int cpf) throws SQLException {
@@ -43,17 +46,16 @@ public class ServicoCliente {
                         "select * from cliente where (cpf = " + cpf + ")")) {
             rs.first();
 
-            clienteRet = new Pessoa(rs.getInt("ID"),
+            clienteRet = new Cliente(rs.getInt("ID"),
                     rs.getString("nome"),
-                    rs.getString("telefone"),
                     rs.getString("cpf"),
                     rs.getString("dataNasc"),
+                    rs.getString("sexo"),
+                    rs.getString("telefone"),
                     rs.getString("email"),
                     rs.getFloat("renda"),
-                    rs.getString("sexo"),
                     rs.getString("senha"),
-                    rs.getInt("ENDERECO_ID"),
-                    rs.getInt("DADOS_BANCO_ID"));
+                    rs.getInt("ENDERECO_ID"));
            
         }
         conexao.close();
@@ -67,7 +69,7 @@ public class ServicoCliente {
                         "select * from cliente order by ID")) {
 
             while (rs.next()) {
-                clienteRet.add(new Pessoa(rs.getInt("ID"),
+                clienteRet.add(new Cliente(rs.getInt("ID"),
                     rs.getString("nome"),
                     rs.getString("telefone"),
                     rs.getString("cpf"),
@@ -97,8 +99,11 @@ public class ServicoCliente {
             pst.setString(5, endereco.getNumRua());
   
             pst.executeUpdate();
-        }
         conexao.close();
+        }
+        catch (SQLException e) {
+               e.printStackTrace();
+           }
     }
 
     public Endereco selectEndereco(int id) throws SQLException {
@@ -140,54 +145,71 @@ public class ServicoCliente {
         return enderecoRet;
     }
     
-    public void insertDadosB(Cliente dadosB) throws SQLException {
+    public void insertMovimentacao(Movimentacao movimentacao) throws SQLException {
         try (PreparedStatement pst = conexao.getConexao().prepareStatement
-        ("insert into dados_banco (ID, agencia, numconta, tipoconta)"
+        ("insert into movimentacao (ID, contaOrigem, dataTran, valorTran,"
+                + "debCre, desTran, CLIENTE_ID)"
                 + " values "
-                + "(0, ?, ?, ?)")) {
+                + "(0, ?, ?, ?,?,?)")) {
             
-            pst.setString(1, dadosB.getAgencia());
-            pst.setString(2, dadosB.getNumConta());
-            pst.setString(3, dadosB.getTipoConta());
+            pst.setInt(1, movimentacao.getContaOrigem());
+            pst.setDate(2, (Date) movimentacao.getDataTran());
+            pst.setFloat(3, movimentacao.getValorTran());
+            pst.setString(4, movimentacao.getDebCre());
+            pst.setString(5, movimentacao.getDescTran());
+            pst.setInt(6, cliente.getIdCli());      
+            
+                    
+                    
   
             pst.executeUpdate();
-        }
         conexao.close();
+        }
+        catch (SQLException e) {
+               e.printStackTrace();
+           }
     }
 
-    public Cliente selectDadosB(int numconta) throws SQLException {
-        Cliente dadosBRet = null;
+    public Movimentacao selectMovimentacao(int idCli) throws SQLException {
+        Movimentacao movimentacaoRet = null;
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
-                        "select * from dados_banco where (numconta = " + numconta + ")")) {
+                        "select * from movimentacao where (numconta = " + idCli + ")")) {
             rs.first();
 
-            dadosBRet = new Cliente(rs.getInt("ID"),
-                    rs.getString("agencia"),
-                    rs.getString("numconta"),
-                    rs.getString("tipoconta"));
+            movimentacaoRet = new Movimentacao(rs.getInt("ID"),
+                    rs.getString("contaOrigem"),
+                    rs.getDate("dataTran"),
+                    rs.getString("valorTran"),
+                    rs.getString("debCre"),
+                    rs.getString("descTran"),
+                    rs.getString("CLIENTE_ID"));
            
         }
         conexao.close();
-        return dadosBRet;
+        return movimentacaoRet;
     }
 
-    public ArrayList<Cliente> getDadosBByLista() throws SQLException {
-        ArrayList<Cliente> dadosBRet = new ArrayList<Cliente>();
+    public ArrayList<Movimentacao> getMovimentacaoByLista(int idCli) throws SQLException {
+        ArrayList<Movimentacao> movimentacaoRet = new ArrayList<Movimentacao>();
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
-                        "select * from dados_banco order by ID")) {
+                        "select * from registro where contaOrigem = " + idCli
+                                + " order by dataTran" 
+                        )) {
 
             while (rs.next()) {
-                dadosBRet.add(new Cliente(rs.getInt("ID"),
-                    rs.getString("agencia"),
-                    rs.getString("numconta"),
-                    rs.getString("tipoconta")));
+                movimentacaoRet.add(new Movimentacao(rs.getInt("ID"),
+                    rs.getInt("contaOrigem"),
+                    rs.getDate("dataTran"),
+                    rs.getString("valorTran"),
+                    rs.getString("debCre"),
+                    rs.getString("descTran")));
 
             }
         }
         conexao.close();
-        return dadosBRet;
+        return movimentacaoRet;
     }
     
     
