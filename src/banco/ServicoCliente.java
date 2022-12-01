@@ -1,12 +1,12 @@
 package banco;
 
-import classes.Cliente;
+import classes.Pessoa;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
-import classes.DadosB;
+import classes.Cliente;
 import classes.Endereco;
 
 
@@ -14,9 +14,9 @@ public class ServicoCliente {
 
     private final ConexaoBanco conexao = new ConexaoBanco();
     private Endereco endereco = new Endereco();
-    private DadosB dadosB = new DadosB();
+    private Cliente dadosB = new Cliente();
 
-    public void insert(Cliente cliente) throws SQLException {
+    public void insert(Pessoa cliente) throws SQLException {
         try (PreparedStatement pst = conexao.getConexao().prepareStatement("insert into cliente (ID, nome, telefone, cpf, dataNasc, email,"
                 + "renda, sexo, senha, ENDERECO_ID, DADOS_BANCO_ID) values "
                 + "(0, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
@@ -36,14 +36,14 @@ public class ServicoCliente {
         conexao.close();
     }
 
-    public Cliente select(int cpf) throws SQLException {
-        Cliente clienteRet = null;
+    public Pessoa select(int cpf) throws SQLException {
+        Pessoa clienteRet = null;
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
                         "select * from cliente where (cpf = " + cpf + ")")) {
             rs.first();
 
-            clienteRet = new Cliente(rs.getInt("ID"),
+            clienteRet = new Pessoa(rs.getInt("ID"),
                     rs.getString("nome"),
                     rs.getString("telefone"),
                     rs.getString("cpf"),
@@ -60,14 +60,14 @@ public class ServicoCliente {
         return clienteRet;
     }
 
-    public ArrayList<Cliente> getClienteByLista() throws SQLException {
-        ArrayList<Cliente> clienteRet = new ArrayList<Cliente>();
+    public ArrayList<Pessoa> getClienteByLista() throws SQLException {
+        ArrayList<Pessoa> clienteRet = new ArrayList<Pessoa>();
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
                         "select * from cliente order by ID")) {
 
             while (rs.next()) {
-                clienteRet.add(new Cliente(rs.getInt("ID"),
+                clienteRet.add(new Pessoa(rs.getInt("ID"),
                     rs.getString("nome"),
                     rs.getString("telefone"),
                     rs.getString("cpf"),
@@ -140,7 +140,7 @@ public class ServicoCliente {
         return enderecoRet;
     }
     
-    public void insertDadosB(DadosB dadosB) throws SQLException {
+    public void insertDadosB(Cliente dadosB) throws SQLException {
         try (PreparedStatement pst = conexao.getConexao().prepareStatement
         ("insert into dados_banco (ID, agencia, numconta, tipoconta)"
                 + " values "
@@ -155,14 +155,14 @@ public class ServicoCliente {
         conexao.close();
     }
 
-    public DadosB selectDadosB(int numconta) throws SQLException {
-        DadosB dadosBRet = null;
+    public Cliente selectDadosB(int numconta) throws SQLException {
+        Cliente dadosBRet = null;
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
                         "select * from dados_banco where (numconta = " + numconta + ")")) {
             rs.first();
 
-            dadosBRet = new DadosB(rs.getInt("ID"),
+            dadosBRet = new Cliente(rs.getInt("ID"),
                     rs.getString("agencia"),
                     rs.getString("numconta"),
                     rs.getString("tipoconta"));
@@ -172,14 +172,14 @@ public class ServicoCliente {
         return dadosBRet;
     }
 
-    public ArrayList<DadosB> getDadosBByLista() throws SQLException {
-        ArrayList<DadosB> dadosBRet = new ArrayList<DadosB>();
+    public ArrayList<Cliente> getDadosBByLista() throws SQLException {
+        ArrayList<Cliente> dadosBRet = new ArrayList<Cliente>();
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
                         "select * from dados_banco order by ID")) {
 
             while (rs.next()) {
-                dadosBRet.add(new DadosB(rs.getInt("ID"),
+                dadosBRet.add(new Cliente(rs.getInt("ID"),
                     rs.getString("agencia"),
                     rs.getString("numconta"),
                     rs.getString("tipoconta")));
