@@ -10,13 +10,16 @@ import classes.Cliente;
 import classes.Endereco;
 import classes.Movimentacao;
 import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 
 public class ServicoCliente {
 
     private final ConexaoBanco conexao = new ConexaoBanco();
-    private Endereco endereco = new Endereco();
-    private Cliente cliente = new Cliente();
+    private final Endereco endereco = new Endereco();
+    private final Cliente cliente = new Cliente();
 
     public void insert(Cliente cliente) throws SQLException {
         try (PreparedStatement pst = conexao.getConexao().prepareStatement("insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email,"
@@ -47,15 +50,15 @@ public class ServicoCliente {
             rs.first();
 
             clienteRet = new Cliente(rs.getInt("ID"),
-                    rs.getString("nome"),
-                    rs.getString("cpf"),
-                    rs.getString("dataNasc"),
-                    rs.getString("sexo"),
                     rs.getString("telefone"),
                     rs.getString("email"),
-                    rs.getFloat("renda"),
                     rs.getString("senha"),
-                    rs.getInt("ENDERECO_ID"));
+                    rs.getInt("ENDERECO_ID"),
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getString("sexo"),
+                    rs.getString("ENDERECO_ID"),
+                    rs.getDate("dataNasc"));               
            
         }
         conexao.close();
@@ -70,18 +73,16 @@ public class ServicoCliente {
 
             while (rs.next()) {
                 clienteRet.add(new Cliente(rs.getInt("ID"),
-                    rs.getString("nome"),
                     rs.getString("telefone"),
-                    rs.getString("cpf"),
-                    rs.getString("dataNasc"),
                     rs.getString("email"),
-                    rs.getFloat("renda"),
-                    rs.getString("sexo"),
                     rs.getString("senha"),
                     rs.getInt("ENDERECO_ID"),
-                    rs.getInt("DADOS_BANCO_ID")));
-
-            }
+                    rs.getString("nome"),
+                    rs.getString("cpf"),
+                    rs.getString("sexo"),
+                    rs.getString("ENDERECO_ID"),
+                    rs.getDate("dataNasc")));
+            }//int idCli, String telefone, String email, String senha, int id, String nome, String cpf, String sexo, String endereco, Date dataNasc)
         }
         conexao.close();
         return clienteRet;
@@ -177,19 +178,27 @@ public class ServicoCliente {
                         "select * from movimentacao where (numconta = " + idCli + ")")) {
             rs.first();
 
-            movimentacaoRet = new Movimentacao(rs.getInt("ID"),
-                    rs.getString("contaOrigem"),
-                    rs.getDate("dataTran"),
-                    rs.getString("valorTran"),
+            movimentacaoRet = new Movimentacao (rs.getInt("ID"),
+                    rs.getInt("contaOrigem"),
                     rs.getString("debCre"),
                     rs.getString("descTran"),
-                    rs.getString("CLIENTE_ID"));
+                    rs.getDate("dataTran"),
+                    rs.getFloat("valorTran"));
            
-        }
+        } //(int id, int contaOrigem, String debCre, String descTran, Date dataTran, Float valorTran)
         conexao.close();
         return movimentacaoRet;
     }
 
+    public String getDatetoString(Date dataNasc){  
+                Date date = (Date) Calendar.getInstance().getTime();  
+                DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");  
+                String strDate = dateFormat.format(date);  
+            
+                return strDate; 
+                 
+        }
+    
     public ArrayList<Movimentacao> getMovimentacaoByLista(int idCli) throws SQLException {
         ArrayList<Movimentacao> movimentacaoRet = new ArrayList<Movimentacao>();
         try (Statement st = conexao.getConexao().createStatement();
@@ -201,11 +210,11 @@ public class ServicoCliente {
             while (rs.next()) {
                 movimentacaoRet.add(new Movimentacao(rs.getInt("ID"),
                     rs.getInt("contaOrigem"),
-                    rs.getDate("dataTran"),
-                    rs.getString("valorTran"),
                     rs.getString("debCre"),
-                    rs.getString("descTran")));
-
+                    rs.getString("descTran"),
+                    rs.getDate("dataTran"),     
+                    rs.getFloat("valorTran")));
+//int id, int contaOrigem, String debCre, String descTran, Date dataTran, Float valorTran
             }
         }
         conexao.close();
