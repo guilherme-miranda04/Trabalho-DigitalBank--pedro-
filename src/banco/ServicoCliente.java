@@ -18,8 +18,8 @@ import java.util.Calendar;
 public class ServicoCliente {
 
     private final ConexaoBanco conexao = new ConexaoBanco();
-    private final Endereco endereco = new Endereco();
-    private final Cliente cliente = new Cliente();
+    private Endereco endereco = new Endereco();
+    private Cliente cliente = new Cliente();
 
     public void insert(Cliente cliente) throws SQLException {
         try (PreparedStatement pst = conexao.getConexao().prepareStatement("insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email,"
@@ -214,7 +214,7 @@ public class ServicoCliente {
                     rs.getString("descTran"),
                     rs.getDate("dataTran"),     
                     rs.getFloat("valorTran")));
-//int id, int contaOrigem, String debCre, String descTran, Date dataTran, Float valorTran
+
             }
         }
         conexao.close();

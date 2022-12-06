@@ -14,9 +14,7 @@ import java.sql.Date;
 public class Cliente extends Pessoa {
     
     private int idCli;;
-    private String telefone, email, senha, nome, cpf, sexo, endereco;
-    private int id;
-    private Date dataNasc;
+    private String telefone, email, senha;
 
     public Cliente(int idCli, String telefone, String email, String senha, int id, String nome, String cpf, String sexo, String endereco, Date dataNasc) {
         super(id, nome, cpf, sexo, endereco, dataNasc);
@@ -26,6 +24,11 @@ public class Cliente extends Pessoa {
         this.senha = senha;
     }
 
+    public Cliente() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+   
+    
 
     public int getIdCli() {
         return idCli;
