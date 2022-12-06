@@ -1,5 +1,8 @@
 package prbancodigital;
 
+import classes.ControllerLogin;
+import view.FLogin;
+
 /**
  *
  * @author guilherme.miranda1
@@ -7,7 +10,12 @@ package prbancodigital;
 
 public class PrBancoDigital {
     public static void main(String[] args) {
-        // TODO code application logic here
+        FLogin FormLogin = new FLogin();
+
+        ControllerLogin controllerloginn = new ControllerLogin(FormLogin);
+        FormLogin.setVisible(true);
+        FormLogin.setLocationRelativeTo(null);
+        FormLogin.jBotLEntrar.addActionListener(controllerloginn);
     }
     
 }
