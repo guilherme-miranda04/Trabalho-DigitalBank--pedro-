@@ -411,18 +411,18 @@ public class FCadastroConta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JFormattedTextField JCampoCadCPF;
-    private javax.swing.JButton jBotCCadastrar;
-    private javax.swing.JComboBox<String> jBoxCSexo;
-    private javax.swing.JComboBox<String> jBoxCUF;
-    private javax.swing.JTextField jCampoCCEP;
-    private javax.swing.JFormattedTextField jCampoCDataNasc;
-    private javax.swing.JTextField jCampoCEmail;
-    private javax.swing.JTextField jCampoCFone;
-    private javax.swing.JTextField jCampoCNome;
-    private javax.swing.JTextField jCampoCNum;
-    private javax.swing.JTextField jCampoCRua;
-    private javax.swing.JPasswordField jCampoCSenha;
-    private javax.swing.JTextField jCampoCidade;
+    public javax.swing.JButton jBotCCadastrar;
+    public javax.swing.JComboBox<String> jBoxCSexo;
+    public javax.swing.JComboBox<String> jBoxCUF;
+    public javax.swing.JTextField jCampoCCEP;
+    public javax.swing.JFormattedTextField jCampoCDataNasc;
+    public javax.swing.JTextField jCampoCEmail;
+    public javax.swing.JTextField jCampoCFone;
+    public javax.swing.JTextField jCampoCNome;
+    public javax.swing.JTextField jCampoCNum;
+    public javax.swing.JTextField jCampoCRua;
+    public javax.swing.JPasswordField jCampoCSenha;
+    public javax.swing.JTextField jCampoCidade;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
