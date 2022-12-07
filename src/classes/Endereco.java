@@ -10,10 +10,11 @@ package classes;
  * @author hercilio.neto1
  */
 public class Endereco {
-    private int id;
-    private String estado, cidade, rua , cep, numRua;
 
-    public Endereco(int id, String estado, String cidade, String rua, 
+    private int id;
+    private String estado, cidade, rua, cep, numRua;
+
+    public Endereco(int id, String estado, String cidade, String rua,
             String cep, String numRua) {
         this.id = id;
         this.estado = estado;
@@ -26,9 +27,6 @@ public class Endereco {
     public Endereco() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
-
-  
-    
 
     public int getId() {
         return id;
@@ -77,5 +75,5 @@ public class Endereco {
     public void setNumRua(String numRua) {
         this.numRua = numRua;
     }
-    
+
 }
