@@ -15,7 +15,13 @@ public class FuncaoGenericas {
     public String ConvertDate() {
         FCadastroConta formCadConta = new FCadastroConta();
         Cliente fcadCliente = new Cliente();
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        sdf.parse(fcadCliente.getDataStr);
         
+        
+        
+
+
         formCadConta.set()
         return null;
     }
