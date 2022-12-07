@@ -2,6 +2,7 @@ package classes;
 
 import banco.ConexaoBanco;
 import classes.Pessoa;
+import classes.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -18,7 +19,7 @@ public class ServicoCliente extends ConexaoBanco {
 
     private final ConexaoBanco conexao = new ConexaoBanco();
     private Endereco endereco = new Endereco();
-    private Cliente cliente = new Cliente(0, "", "", "", "", null);
+    private Cliente cliente = new Cliente();
 
     public void insert(Cliente cliente) throws SQLException {
         try (PreparedStatement pst = conexao.getConexao().prepareStatement("insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email,"
@@ -58,13 +59,13 @@ public class ServicoCliente extends ConexaoBanco {
                     rs.getString("ENDERECO_ID"),
                     rs.getDate("dataNasc"));
 
-        }
+        } //int idCli, String telefone, String email, String senha, String dataStr, int id, String nome, String cpf, String sexo, String endereco, Date dataNasc) {
         conexao.close();
         return clienteRet;
     }
 
-    public ArrayList<Pessoa> getClienteByLista() throws SQLException {
-        ArrayList<Pessoa> clienteRet = new ArrayList<Pessoa>();
+    public ArrayList<Cliente> getClienteByLista() throws SQLException {
+        ArrayList<Cliente> clienteRet = new ArrayList<Cliente>();
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
                         "select * from cliente order by ID")) {

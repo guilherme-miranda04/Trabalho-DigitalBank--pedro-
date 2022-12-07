@@ -5,6 +5,7 @@
  */
 package classes;
 
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -14,28 +15,30 @@ import java.util.Date;
 public class Cliente extends Pessoa {
 
     private int idCli;
-    private String telefone, email, senha, dataStr;
-
-    public Cliente(int id, String nome, String cpf, String sexo, String endereco, Date dataNasc) {
-        super(id, nome, cpf, sexo, endereco, dataNasc);
-    }
-
+    private String telefone, email, senha;
     
+    private ArrayList<Cliente> lista = new ArrayList<Cliente>();
 
-    public String getDataStr() {
-        return dataStr;
+    public Cliente() {
     }
 
-    public void setDataStr(String data) {
-        this.dataStr = data;
+    public Cliente(int idCli, String telefone, String email, String senha) {
+        this.idCli = idCli;
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+    }
+
+    Cliente(int aInt, String string, String string0, String string1, int aInt0, String string2, String string3, String string4, String string5, java.sql.Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     public int getIdCli() {
         return idCli;
     }
 
-    public void setIdCli(int id) {
-        this.idCli = id;
+    public void setIdCli(int idCli) {
+        this.idCli = idCli;
     }
 
     public String getTelefone() {
@@ -61,5 +64,6 @@ public class Cliente extends Pessoa {
     public void setSenha(String senha) {
         this.senha = senha;
     }
+ 
 
 }
