@@ -10,7 +10,7 @@ import java.util.Date;
 public class Pessoa {
 
     private int id;
-    private String nome, cpf, sexo, endereco;
+    private String nome, cpf, sexo;
     private Date dataNasc;
 
     private ArrayList<Pessoa> lista = new ArrayList<Pessoa>();
@@ -74,14 +74,6 @@ public class Pessoa {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
     }
 
     public Date getDataNasc() {

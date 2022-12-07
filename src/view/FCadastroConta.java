@@ -8,6 +8,9 @@ package view;
 import classes.Cliente;
 import classes.Endereco;
 import classes.Pessoa;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -17,6 +20,7 @@ public class FCadastroConta extends javax.swing.JFrame {
     Pessoa pessoa = new Pessoa();
     Cliente cliente = null;
     Endereco endereco = null;
+    private Date dataNC;
 
     /**
      * Creates new form FCadastroConta
@@ -374,12 +378,19 @@ public class FCadastroConta extends javax.swing.JFrame {
     private void jCampoCFoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoCFoneActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCampoCFoneActionPerformed
-
+    
+    public Date ValidarData() throws ParseException{
+        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+        Date dataNC = sdf.parse(jCampoCDataNasc.getText());
+        
+        return dataNC;
+    }
+    
     private void jBotCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotCCadastrarActionPerformed
         // Salva as informações no Getters and Setters
         pessoa.setNome(jCampoCNome.getText());
         pessoa.setCpf(JCampoCadCPF.getText());
-        pessoa.setDataNasc(jCampoCDataNasc.getText());
+        pessoa.setDataNasc(dataNC);
         pessoa.setSexo((String) jBoxCSexo.getSelectedItem());
         cliente.setTelefone(jCampoCFone.getText());
         cliente.setEmail(jCampoCEmail.getText());
@@ -430,6 +441,7 @@ public class FCadastroConta extends javax.swing.JFrame {
             }
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JFormattedTextField JCampoCadCPF;
