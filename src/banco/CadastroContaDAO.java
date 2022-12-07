@@ -3,9 +3,10 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package banco;
 
-import banco.ConexaoBanco;
+import classes.Cliente;
+import classes.Endereco;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -15,7 +16,7 @@ import java.sql.SQLException;
  *
  * @author guilherme.miranda1
  */
-public class CadastroConta extends ConexaoBanco {
+public class CadastroContaDAO extends ConexaoBanco {
     
     public boolean InserirDadosBanco (Cliente cadcliente, Endereco cadendereco) {
     

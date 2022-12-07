@@ -5,6 +5,8 @@
  */
 package classes;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import view.FCadastroConta;
 
 /**
@@ -12,17 +14,11 @@ import view.FCadastroConta;
  * @author guilherme.miranda1
  */
 public class FuncaoGenericas {
-    public String ConvertDate() {
+    public String ConvertDate(Cliente fcadCliente) throws ParseException {
         FCadastroConta formCadConta = new FCadastroConta();
-        Cliente fcadCliente = new Cliente();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.parse(fcadCliente.getDataStr);
+        sdf.parse(fcadCliente.getDataStr());
         
-        
-        
-
-
-        formCadConta.set()
         return null;
     }
 }

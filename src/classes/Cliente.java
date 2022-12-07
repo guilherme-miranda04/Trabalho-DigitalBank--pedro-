@@ -5,7 +5,7 @@
  */
 package classes;
 
-import java.sql.Date;
+import java.util.Date;
 
 /**
  *
@@ -16,13 +16,11 @@ public class Cliente extends Pessoa {
     private int idCli;
     private String telefone, email, senha, dataStr;
 
-    public Cliente(int idCli, String telefone, String email, String senha, int id, String nome, String cpf, String sexo, String endereco, Date dataNasc) {
+    public Cliente(int id, String nome, String cpf, String sexo, String endereco, Date dataNasc) {
         super(id, nome, cpf, sexo, endereco, dataNasc);
-        this.idCli = idCli;
-        this.telefone = telefone;
-        this.email = email;
-        this.senha = senha;
     }
+
+    
 
     public String getDataStr() {
         return dataStr;
@@ -31,8 +29,7 @@ public class Cliente extends Pessoa {
     public void setDataStr(String data) {
         this.dataStr = data;
     }
-    
-    
+
     public int getIdCli() {
         return idCli;
     }

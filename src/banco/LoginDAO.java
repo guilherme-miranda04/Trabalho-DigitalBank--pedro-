@@ -3,10 +3,13 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package classes;
+package banco;
 
 import classes.Login;
 import banco.ConexaoBanco;
+import banco.ConexaoBanco;
+import classes.Login;
+import classes.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
