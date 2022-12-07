@@ -15,14 +15,6 @@ public class Pessoa {
 
     private ArrayList<Pessoa> lista = new ArrayList<Pessoa>();
 
-    public Pessoa(int id, String nome, String cpf, String sexo, String endereco, Date dataNasc) {
-        this.id = id;
-        this.nome = nome;
-        this.cpf = cpf;
-        this.sexo = sexo;
-        this.endereco = endereco;
-        this.dataNasc = dataNasc;
-    }
 
 //    public Pessoa(int aInt, String string, String string0, String string1, String string2, String string3, String string4, float aFloat, String string5, int aInt0) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
