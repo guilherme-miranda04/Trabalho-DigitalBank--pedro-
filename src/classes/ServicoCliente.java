@@ -154,7 +154,6 @@ public class ServicoCliente extends ConexaoBanco {
             pst.setFloat(3, movimentacao.getValorTran());
             pst.setString(4, movimentacao.getDebCre());
             pst.setString(5, movimentacao.getDescTran());
-            pst.setInt(6, cliente.getIdCli());
 
             pst.executeUpdate();
             conexao.close();

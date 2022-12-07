@@ -1,10 +1,6 @@
 package classes;
 
-
 import java.util.ArrayList;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.Date;
 
 public class Pessoa {
@@ -13,13 +9,11 @@ public class Pessoa {
     private String nome, cpf, sexo;
     private Date dataNasc;
 
-    private ArrayList<Pessoa> lista = new ArrayList<Pessoa>();
-
+    private ArrayList<Pessoa> listaPessoa = new ArrayList<Pessoa>();
 
 //    public Pessoa(int aInt, String string, String string0, String string1, String string2, String string3, String string4, float aFloat, String string5, int aInt0) {
 //        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 //    }
-
 //    public ArrayList getListaClienteToString() {
 //        ArrayList dados = new ArrayList();
 //
@@ -34,7 +28,6 @@ public class Pessoa {
 //        }
 //        return dados;
 //    }
-
 //    public String getDatetoString(Date dataNasc) {
 //        Date date = (Date) Calendar.getInstance().getTime();
 //        DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd hh:mm:ss");
@@ -43,7 +36,6 @@ public class Pessoa {
 //        return strDate;
 //
 //    }
-
     public int getId() {
         return id;
     }
@@ -84,12 +76,12 @@ public class Pessoa {
         this.dataNasc = dataNasc;
     }
 
-    public ArrayList<Pessoa> getLista() {
-        return lista;
+    public ArrayList<Pessoa> getListaPessoa() {
+        return listaPessoa;
     }
 
-    public void setLista(ArrayList<Pessoa> lista) {
-        this.lista = lista;
+    public void setListaPessoa(ArrayList<Pessoa> listaPessoa) {
+        this.listaPessoa = listaPessoa;
     }
 
 }
