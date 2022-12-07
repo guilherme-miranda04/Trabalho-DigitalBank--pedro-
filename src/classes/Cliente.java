@@ -14,21 +14,13 @@ import java.util.Date;
 public class Cliente extends Pessoa {
 
     private int idCli;
-    private String telefone, email, senha, dataStr;
+    private String telefone, email, senha;
 
     public Cliente(int id, String nome, String cpf, String sexo, String endereco, Date dataNasc) {
         super(id, nome, cpf, sexo, endereco, dataNasc);
     }
 
     
-
-    public String getDataStr() {
-        return dataStr;
-    }
-
-    public void setDataStr(String data) {
-        this.dataStr = data;
-    }
 
     public int getIdCli() {
         return idCli;

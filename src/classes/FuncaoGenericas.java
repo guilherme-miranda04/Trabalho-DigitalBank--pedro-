@@ -17,7 +17,6 @@ public class FuncaoGenericas {
     public String ConvertDate(Cliente fcadCliente) throws ParseException {
         FCadastroConta formCadConta = new FCadastroConta();
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        sdf.parse(fcadCliente.getDataStr());
         
         return null;
     }
