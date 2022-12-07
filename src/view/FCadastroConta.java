@@ -7,7 +7,6 @@ package view;
 
 import classes.Cliente;
 import classes.Endereco;
-import java.util.logging.Logger;
 
 /**
  *
@@ -376,14 +375,15 @@ public class FCadastroConta extends javax.swing.JFrame {
     }//GEN-LAST:event_jCampoCFoneActionPerformed
 
     private void jBotCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotCCadastrarActionPerformed
-        // Tenta salvar as informações
+        // Salva as informações no Getters and Setters
         cliente.setNome(jCampoCNome.getText());
         cliente.setCpf(JCampoCadCPF.getText());
-        //String datacriacao = datacriacao.setDataNasc(jCampoCDataNasc.getText());
+        
+        // *VERIFICAR* String datacriacao = datacriacao.setDataNasc(jCampoCDataNasc.getText());
         cliente.setSexo((String) jBoxCSexo.getSelectedItem());
         cliente.setTelefone(jCampoCFone.getText());
         cliente.setEmail(jCampoCEmail.getText());
-
+        // Salva as informações de endereço no Getters and Setters
         endereco.setEstado((String) jBoxCUF.getSelectedItem());
         endereco.setCidade(jCampoCidade.getText());
         endereco.setRua(jCampoCRua.getText());

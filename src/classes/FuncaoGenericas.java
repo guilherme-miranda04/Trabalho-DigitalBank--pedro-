@@ -11,7 +11,7 @@ import view.FCadastroConta;
  *
  * @author guilherme.miranda1
  */
-public class FuncaoConvencional {
+public class FuncaoGenericas {
     public String ConvertDate() {
         FCadastroConta formCadConta = new FCadastroConta();
         Cliente fcadCliente = new Cliente();
