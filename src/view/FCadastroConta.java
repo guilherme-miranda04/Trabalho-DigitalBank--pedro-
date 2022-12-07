@@ -378,8 +378,7 @@ public class FCadastroConta extends javax.swing.JFrame {
         // Salva as informações no Getters and Setters
         cliente.setNome(jCampoCNome.getText());
         cliente.setCpf(JCampoCadCPF.getText());
-        
-        // *VERIFICAR* String datacriacao = datacriacao.setDataNasc(jCampoCDataNasc.getText());
+        cliente.setDataStr(jCampoCDataNasc.getText());
         cliente.setSexo((String) jBoxCSexo.getSelectedItem());
         cliente.setTelefone(jCampoCFone.getText());
         cliente.setEmail(jCampoCEmail.getText());
