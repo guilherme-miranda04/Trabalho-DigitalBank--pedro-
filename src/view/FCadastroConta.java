@@ -7,13 +7,14 @@ package view;
 
 import classes.Cliente;
 import classes.Endereco;
+import classes.Pessoa;
 
 /**
  *
  * @author guilherme.miranda1
  */
 public class FCadastroConta extends javax.swing.JFrame {
-
+    Pessoa pessoa = new Pessoa();
     Cliente cliente = null;
     Endereco endereco = null;
 
@@ -376,12 +377,13 @@ public class FCadastroConta extends javax.swing.JFrame {
 
     private void jBotCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotCCadastrarActionPerformed
         // Salva as informações no Getters and Setters
-        cliente.setNome(jCampoCNome.getText());
-        cliente.setCpf(JCampoCadCPF.getText());
-        // cliente.setDataNasc(jCampoCDataNasc.getText());
-        cliente.setSexo((String) jBoxCSexo.getSelectedItem());
+        pessoa.setNome(jCampoCNome.getText());
+        pessoa.setCpf(JCampoCadCPF.getText());
+        pessoa.setDataNasc(jCampoCDataNasc.getText());
+        pessoa.setSexo((String) jBoxCSexo.getSelectedItem());
         cliente.setTelefone(jCampoCFone.getText());
         cliente.setEmail(jCampoCEmail.getText());
+        cliente.setSenha(jCampoCSenha.getText());
         // Salva as informações de endereço no Getters and Setters
         endereco.setEstado((String) jBoxCUF.getSelectedItem());
         endereco.setCidade(jCampoCidade.getText());
