@@ -413,4 +413,8 @@ public class FPrincipal extends javax.swing.JFrame {
     public javax.swing.JLabel jTxtPUser;
     private javax.swing.JLabel jTxtPValor;
     // End of variables declaration//GEN-END:variables
+
+    public void jTxtPSaldo(String saldo) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }
