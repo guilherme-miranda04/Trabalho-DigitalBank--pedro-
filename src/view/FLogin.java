@@ -197,7 +197,7 @@ public class FLogin extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBotLCConta;
+    public javax.swing.JButton jBotLCConta;
     public javax.swing.JButton jBotLEntrar;
     public javax.swing.JFormattedTextField jCampoLCPF;
     public javax.swing.JPasswordField jCampoLSenha;

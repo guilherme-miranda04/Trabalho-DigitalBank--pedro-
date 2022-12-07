@@ -382,10 +382,10 @@ public class FPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBotPConcluido;
-    private javax.swing.JComboBox<String> jBoxPOpcao;
-    private javax.swing.JTextArea jCampoPDesc;
-    private javax.swing.JFormattedTextField jCampoPValor;
+    public javax.swing.JButton jBotPConcluido;
+    public javax.swing.JComboBox<String> jBoxPOpcao;
+    public javax.swing.JTextArea jCampoPDesc;
+    public javax.swing.JFormattedTextField jCampoPValor;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel10;
@@ -409,8 +409,8 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jTxtPDesc;
     private javax.swing.JLabel jTxtPOLA;
     private javax.swing.JLabel jTxtPOpcao;
-    private javax.swing.JLabel jTxtPSaldo;
-    private javax.swing.JLabel jTxtPUser;
+    public javax.swing.JLabel jTxtPSaldo;
+    public javax.swing.JLabel jTxtPUser;
     private javax.swing.JLabel jTxtPValor;
     // End of variables declaration//GEN-END:variables
 }
