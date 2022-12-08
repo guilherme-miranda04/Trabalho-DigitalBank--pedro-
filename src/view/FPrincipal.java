@@ -5,6 +5,8 @@
  */
 package view;
 
+import classes.Movimentacao;
+
 /**
  *
  * @author guilherme.miranda1
@@ -57,6 +59,7 @@ public class FPrincipal extends javax.swing.JFrame {
         jBotPConcluido = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
         jPRelatorio = new javax.swing.JTable();
+        txtCli = new javax.swing.JLabel();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro Social"));
 
@@ -182,6 +185,13 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jTxtPSaldo.setFont(new java.awt.Font("Segoe UI", 0, 24)); // NOI18N
         jTxtPSaldo.setText("0.00");
+        jTxtPSaldo.addInputMethodListener(new java.awt.event.InputMethodListener() {
+            public void caretPositionChanged(java.awt.event.InputMethodEvent evt) {
+            }
+            public void inputMethodTextChanged(java.awt.event.InputMethodEvent evt) {
+                jTxtPSaldoInputMethodTextChanged(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -211,8 +221,18 @@ public class FPrincipal extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Movimentação"));
 
         jCampoPValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jCampoPValor.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jCampoPValorActionPerformed(evt);
+            }
+        });
 
         jBoxPOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enviar", "Receber", " " }));
+        jBoxPOpcao.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBoxPOpcaoActionPerformed(evt);
+            }
+        });
 
         jTxtPOpcao.setText("Selecione opção:");
 
@@ -284,6 +304,10 @@ public class FPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jPRelatorio);
 
+        txtCli.setBackground(new java.awt.Color(110, 116, 119));
+        txtCli.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtCli.setText("Usuario");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -294,7 +318,9 @@ public class FPrincipal extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTxtPOLA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtPUser))
+                        .addComponent(jTxtPUser)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCli))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
@@ -308,13 +334,14 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtPOLA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTxtPUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(20, 20, 20)
+                    .addComponent(jTxtPUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtCli, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(65, 65, 65)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 232, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
                 .addGap(24, 24, 24))
         );
 
@@ -344,7 +371,41 @@ public class FPrincipal extends javax.swing.JFrame {
 
     private void jBotPConcluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotPConcluidoActionPerformed
         // TODO add your handling code here:
+        Object valor;
+        Object opcao = jBoxPOpcao.getSelectedItem();
+        Movimentacao movimentacao = new Movimentacao();
+        
+        if (opcao == "Enviar"){
+            movimentacao.setValorTran((Float) jCampoPValor.getValue());
+            movimentacao.setDebCre("D");
+            movimentacao.setDescTran(jCampoPDesc.getText());
+        } else if (opcao == "Receber"){
+            movimentacao.setValorTran((Float) jCampoPValor.getValue());
+            movimentacao.setDebCre("C"); 
+            movimentacao.setDescTran(jCampoPDesc.getText());
+        }
     }//GEN-LAST:event_jBotPConcluidoActionPerformed
+/*
+    
+ FAZER FUNCIONAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   
+    
+    */
+ 
+    private void jBoxPOpcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxPOpcaoActionPerformed
+        // TODO add your handling code here:
+        
+        //criar movimentafcaoo DAO passando como paremetro a pomvimentacvao e dao faz insert nmo banco
+    }//GEN-LAST:event_jBoxPOpcaoActionPerformed
+
+    private void jCampoPValorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoPValorActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCampoPValorActionPerformed
+
+    private void jTxtPSaldoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTxtPSaldoInputMethodTextChanged
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_jTxtPSaldoInputMethodTextChanged
 
     /**
      * @param args the command line arguments
@@ -412,6 +473,7 @@ public class FPrincipal extends javax.swing.JFrame {
     public javax.swing.JLabel jTxtPSaldo;
     public javax.swing.JLabel jTxtPUser;
     private javax.swing.JLabel jTxtPValor;
+    public javax.swing.JLabel txtCli;
     // End of variables declaration//GEN-END:variables
 
     public void jTxtPSaldo(String saldo) {

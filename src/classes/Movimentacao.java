@@ -13,7 +13,9 @@ public class Movimentacao {
     private String  debCre, descTran;
     private Date dataTran;
     private Float valorTran;
-
+    
+    
+    
     public Movimentacao(int id, int contaOrigem, String debCre, String descTran, Date dataTran, Float valorTran) {
         this.id = id;
         this.contaOrigem = contaOrigem;
@@ -22,6 +24,11 @@ public class Movimentacao {
         this.dataTran = dataTran;
         this.valorTran = valorTran;
     }
+
+    public Movimentacao() {
+    }
+
+   
 
 
     public int getId() {

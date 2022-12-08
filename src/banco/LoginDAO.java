@@ -21,8 +21,8 @@ import java.sql.SQLException;
  */
 public class LoginDAO extends ConexaoBanco {
     
-    public boolean ValidarLogin(Login login) {
-        boolean encontrado = false;
+    public int ValidarLogin(Login login) {
+        int encontrado = 0;
         PreparedStatement ps = null;
         Connection con = getConexao();
         ResultSet rs = null;
@@ -34,7 +34,9 @@ public class LoginDAO extends ConexaoBanco {
             rs = ps.executeQuery();
             if (rs != null && rs.next()) {
                 String cpf = rs.getString("Senha");
-                encontrado = cpf.equals(login.getSenha());
+                if(cpf.equals(login.getSenha())) {
+                    encontrado = rs.getInt("id");
+                }
             }
             close();
             

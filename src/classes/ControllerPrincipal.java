@@ -15,10 +15,14 @@ import view.FPrincipal;
  */
 public class ControllerPrincipal implements ActionListener {
     FPrincipal FormPrincipal = new FPrincipal();
+    int clinteID = 0;
     
-    public ControllerPrincipal(String msg) {
+    public ControllerPrincipal(int idcliente) {
         FormPrincipal.setVisible(true);
         FormPrincipal.setLocationRelativeTo(null);
+        clinteID = idcliente;
+        FormPrincipal.txtCli.setText(Integer.toString(clinteID));
+ 
     }
     
     @Override

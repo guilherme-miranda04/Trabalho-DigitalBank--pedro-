@@ -19,6 +19,7 @@ public class ControllerLogin implements ActionListener {
     Login login = new Login();
     LoginDAO logindao = new LoginDAO();
     FLogin FormLogin = new FLogin();
+    int idCliente = 0;
 
     public ControllerLogin(FLogin pTelaLogin) {
         FormLogin = pTelaLogin;
@@ -31,10 +32,10 @@ public class ControllerLogin implements ActionListener {
         login.setCpf(FormLogin.jCampoLCPF.getText());
         login.setSenha(String.valueOf(FormLogin.jCampoLSenha.getPassword()));
 
-        loginSucesso = logindao.ValidarLogin(login);
+        idCliente = logindao.ValidarLogin(login);
 
-        if (loginSucesso) {
-            ControllerPrincipal cPrincipal = new ControllerPrincipal("Cadastro");
+        if (idCliente>0) {
+            ControllerPrincipal cPrincipal = new ControllerPrincipal(idCliente);
         } else {
             ControllerCadastroConta cCriateConta = new ControllerCadastroConta("falha ao logar");
         }
