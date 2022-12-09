@@ -6,7 +6,6 @@
 package banco;
 
 import classes.Cliente;
-import classes.Endereco;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
 import java.sql.Date;
@@ -17,32 +16,46 @@ import java.sql.SQLException;
  * @author guilherme.miranda1
  */
 public class CadastroContaDAO extends ConexaoBanco {
+    private int getID;
+    public boolean InserirDadosBanco (Cliente cadcliente) {
     
-    public boolean InserirDadosBanco (Cliente cadcliente, Endereco cadendereco) {
-    
-        PreparedStatement ps = null;
+        PreparedStatement psP = null;
+        PreparedStatement psE = null;
+        PreparedStatement psI = null;
         Connection con = getConexao();
         
+        
         // Seleciona do Banco Clientes a informação *CPF* //
-        String sql = "insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email, senha) values (?,?,?,?,?,?,?,?)";
+        String sqlEnd = "insert into endereco (ID, estado, cidade, rua, cep, numRua) values (?,?,?,?,?,?)";
+        String sqlCliente = "insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email, senha, ENDERECO_ID) values (?,?,?,?,?,?,?,?,?)";
+        String sqlIdEndereco = "select MAX(e.ID) from endereco e";
+        
         try {
-            ps = con.prepareStatement(sql);
-            ps.setInt(1, 0);
-            ps.setString(2, cadcliente.getNome());
-            ps.setString(3, cadcliente.getCpf());
-            ps.setDate(4, new Date(cadcliente.getDataNasc().getTime()));
-            ps.setString(5, cadcliente.getSexo());
-            ps.setString(6, cadcliente.getTelefone());
-            ps.setString(7, cadcliente.getEmail());
-            ps.setString(8, cadcliente.getSenha());
+            psE = con.prepareStatement(sqlEnd);
+            psP = con.prepareStatement(sqlCliente);
+            psI = con.prepareStatement(sqlIdEndereco);
             
             // Inserção dados Endereço //
-            ps.setString(9, cadendereco.getEstado());
-            ps.setString(10, cadendereco.getCidade());
-            ps.setString(11, cadendereco.getRua());
-            ps.setString(12, cadendereco.getCep());
-            ps.setString(13, cadendereco.getNumRua());
-            
+            psE.setInt(1, 0);
+            psE.setString(2, cadcliente.getEndereco().getEstado());
+            psE.setString(3, cadcliente.getEndereco().getCidade());
+            psE.setString(4, cadcliente.getEndereco().getRua());
+            psE.setString(5, cadcliente.getEndereco().getCep());
+            psE.setString(6, cadcliente.getEndereco().getNumRua());
+            psE.executeUpdate();
+             
+           
+            // Inserção dados Pessoa //
+            psP.setInt(1, 0);
+            psP.setString(2, cadcliente.getNome());
+            psP.setString(3, cadcliente.getCpf());
+            psP.setDate(4, new Date(cadcliente.getDataNasc().getTime()));
+            psP.setString(5, cadcliente.getSexo());
+            psP.setString(6, cadcliente.getTelefone());
+            psP.setString(7, cadcliente.getEmail());
+            psP.setString(8, cadcliente.getSenha());
+            psP.setString(9,sqlIdEndereco);
+            psP.executeUpdate();
             close();
             return true;
         } catch (SQLException e) {

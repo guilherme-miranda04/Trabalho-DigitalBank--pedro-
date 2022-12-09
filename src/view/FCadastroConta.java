@@ -5,9 +5,8 @@
  */
 package view;
 
+import banco.CadastroContaDAO;
 import classes.Cliente;
-import classes.Endereco;
-import classes.Pessoa;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -17,9 +16,7 @@ import java.util.Date;
  * @author guilherme.miranda1
  */
 public class FCadastroConta extends javax.swing.JFrame {
-    Pessoa pessoa = new Pessoa();
-    Cliente cliente = null;
-    Endereco endereco = null;
+    Cliente cliente = new Cliente();
     private Date dataNC;
 
     /**
@@ -387,24 +384,29 @@ public class FCadastroConta extends javax.swing.JFrame {
     }
     
     private void jBotCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotCCadastrarActionPerformed
+        CadastroContaDAO ccDao = new CadastroContaDAO();
+        
         // Salva as informações no Getters and Setters
-        pessoa.setNome(jCampoCNome.getText());
-        pessoa.setCpf(JCampoCadCPF.getText());
-        pessoa.setDataNasc(dataNC);
-        pessoa.setSexo((String) jBoxCSexo.getSelectedItem());
+        cliente.setNome(jCampoCNome.getText());
+        cliente.setCpf(JCampoCadCPF.getText());
+        cliente.setDataNasc(dataNC);
+        cliente.setSexo((String) jBoxCSexo.getSelectedItem());
         cliente.setTelefone(jCampoCFone.getText());
         cliente.setEmail(jCampoCEmail.getText());
         cliente.setSenha(jCampoCSenha.getText());
+        
         // Salva as informações de endereço no Getters and Setters
-        endereco.setEstado((String) jBoxCUF.getSelectedItem());
-        endereco.setCidade(jCampoCidade.getText());
-        endereco.setRua(jCampoCRua.getText());
-        endereco.setNumRua(jCampoCNum.getText());
-        endereco.setCep(jCampoCCEP.getText());
-
+        cliente.getEndereco().setEstado((String) jBoxCUF.getSelectedItem());
+        cliente.getEndereco().setCidade(jCampoCidade.getText());
+        cliente.getEndereco().setRua(jCampoCRua.getText());
+        cliente.getEndereco().setNumRua(jCampoCNum.getText());
+        cliente.getEndereco().setCep(jCampoCCEP.getText());
+        ccDao.InserirDadosBanco(cliente);
+        
         FLogin ViewLogin = new FLogin();
         ViewLogin.setVisible(true);
         dispose();
+        
     }//GEN-LAST:event_jBotCCadastrarActionPerformed
 
     /**
@@ -473,4 +475,5 @@ public class FCadastroConta extends javax.swing.JFrame {
     private javax.swing.JLabel jTxtCSexo;
     private javax.swing.JLabel jTxtCUF;
     // End of variables declaration//GEN-END:variables
+
 }

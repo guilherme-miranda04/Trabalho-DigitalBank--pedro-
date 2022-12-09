@@ -5,6 +5,8 @@
  */
 package classes;
 
+import java.util.ArrayList;
+
 /**
  *
  * @author hercilio.neto1
@@ -12,21 +14,13 @@ package classes;
 public class Endereco {
 
     private int id;
-    private String estado, cidade, rua, cep, numRua;
-
-    public Endereco(int id, String estado, String cidade, String rua,
-            String cep, String numRua) {
-        this.id = id;
-        this.estado = estado;
-        this.cidade = cidade;
-        this.rua = rua;
-        this.cep = cep;
-        this.numRua = numRua;
-    }
-
-    public Endereco() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+    private String estado;
+    private String cidade;
+    private String rua;
+    private String cep;
+    private String numRua;
+    
+    private ArrayList<Endereco> listaEndereco = new ArrayList<Endereco>();
 
     public int getId() {
         return id;
@@ -75,5 +69,14 @@ public class Endereco {
     public void setNumRua(String numRua) {
         this.numRua = numRua;
     }
+
+    public ArrayList<Endereco> getListaEndereco() {
+        return listaEndereco;
+    }
+
+    public void setListaEndereco(ArrayList<Endereco> listaEndereco) {
+        this.listaEndereco = listaEndereco;
+    }
+
 
 }

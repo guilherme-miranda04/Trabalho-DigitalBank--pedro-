@@ -16,20 +16,24 @@ public class Cliente extends Pessoa {
     private String telefone;
     private String email;
     private String senha;
+    private Endereco endereco;
+    private String idendereco;
 
     private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
 
     public Cliente() {
+        if(endereco == null){
+            endereco = new Endereco();
+        }
     }
 
     public Cliente(String telefone, String email, String senha) {
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
-    }
-
-    Cliente(int aInt, String string, String string0, String string1, int aInt0, String string2, String string3, String string4, String string5, java.sql.Date date) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                if(endereco == null){
+            endereco = new Endereco();
+        }
     }
 
     public String getTelefone() {
@@ -63,5 +67,21 @@ public class Cliente extends Pessoa {
     public void setListaCliente(ArrayList<Cliente> listaCliente) {
         this.listaCliente = listaCliente;
     }
-    
+
+    public Endereco getEndereco() {
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco) {
+        this.endereco = endereco;
+    }
+
+    public String getIdendereco() {
+        return idendereco;
+    }
+
+    public void setIdendereco(String idendereco) {
+        this.idendereco = idendereco;
+    }
+
 }
