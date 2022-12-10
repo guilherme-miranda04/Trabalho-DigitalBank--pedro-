@@ -14,7 +14,8 @@ import java.util.Date;
  */
 public class Cliente {
     private int id;
-    private String nome, cpf;
+    private String nome;
+    private String cpf;
     private Date dataNasc;
     private String sexo;
     private String telefone;
@@ -30,7 +31,7 @@ public class Cliente {
 
     public Cliente() {
         if(endereco == null){
-            endereco = new Endereco();
+            endereco = new Endereco(sexo, nome, cpf, cpf, nome);
         }
     }
 
@@ -39,7 +40,7 @@ public class Cliente {
         this.email = email;
         this.senha = senha;
                 if(endereco == null){
-            endereco = new Endereco();
+            endereco = new Endereco(email, email, cpf, cpf, nome);
         }
     }
 

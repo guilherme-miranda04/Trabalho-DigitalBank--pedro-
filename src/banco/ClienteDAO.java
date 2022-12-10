@@ -1,30 +1,17 @@
 package banco;
 
 import banco.ConexaoBanco;
-import classes.Pessoa;
 import classes.Cliente;
-import classes.Cliente;
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.ArrayList;
-import classes.Endereco;
-import classes.Endereco;
-import classes.Movimentacao;
-import classes.Movimentacao;
 import classes.Pessoa;
 import java.sql.Date;
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class ClienteDAO extends ConexaoBanco {
 
     private final ConexaoBanco conexao = new ConexaoBanco();
     private Cliente cliente = new Cliente();
-
-    
 
     public Pessoa selectCliente(String cpf) throws SQLException {
         Pessoa clienteRet = null;
@@ -43,7 +30,6 @@ public class ClienteDAO extends ConexaoBanco {
                 String email = rs.getString("email");
                 int enderecoID = rs.getInt("ENDERECO_ID");
 
-                
                 cliente.setId(id);
                 cliente.setNome(nome);
                 cliente.setCpf(cpf);
@@ -52,8 +38,6 @@ public class ClienteDAO extends ConexaoBanco {
                 cliente.setTelefone(telefone);
                 cliente.setEmail(email);
                 cliente.setEnderecoID(enderecoID);
-            
-               
 
                 System.out.println(cliente);
             }
@@ -63,8 +47,7 @@ public class ClienteDAO extends ConexaoBanco {
         } catch (Exception e) {
             e.printStackTrace();
         }
-   
-        
+
         conexao.close();
         return clienteRet;
     }

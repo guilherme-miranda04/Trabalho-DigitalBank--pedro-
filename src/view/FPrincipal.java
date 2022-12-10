@@ -400,18 +400,10 @@ public class FPrincipal extends javax.swing.JFrame {
         if (jBoxPOpcao.getSelectedIndex() < 0){
             if (opcao == "Enviar"){
                 movimentacao = new Movimentacao(0,new Date(), valorTran,"D",jCampoPDesc.getText(),idCliente); 
-          try {
-              srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao);
-          } catch (SQLException ex) {
-              Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-          }
+                srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao);
             }else if (opcao == "Receber"){
                 movimentacao = new Movimentacao(0,new Date(), valorTran,"C",jCampoPDesc.getText(),idCliente);
-                try {
-              srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao);
-          } catch (SQLException ex) {
-              Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-          }
+                srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao);
         }
             
         } else {
@@ -436,7 +428,7 @@ public class FPrincipal extends javax.swing.JFrame {
 public void carregarTela() throws SQLException{
             int idCliente = Integer.parseInt(txtCli.getText());
             MovimentacaoDAO srv = new MovimentacaoDAO();
-            ArrayList dados = srv.getEquipamentoByQery(idCliente);
+            ArrayList dados = srv.getEquipamentoByQuery(idCliente);
             String [] colunas = new String[] {"Cód. Equip.",
                                               "Equipamento",
                                               "Cód. Perif.",

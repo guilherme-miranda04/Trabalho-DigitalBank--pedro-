@@ -76,7 +76,7 @@ public class MovimentacaoDAO extends ConexaoBanco{
           return movimentacaoRet;
      }
     
-public ArrayList getEquipamentoByQery(int codigo /*passar o txtCli*/) throws SQLException{
+public ArrayList getEquipamentoByQuery(int codigo /*passar o txtCli*/) throws SQLException{
  ArrayList dados = new ArrayList();
         
     try (Statement st = conexao.getConexao().createStatement(); 

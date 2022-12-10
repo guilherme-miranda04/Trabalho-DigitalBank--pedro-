@@ -19,7 +19,7 @@ public class Endereco {
     private String rua;
     private String cep;
     private String numRua;
-    
+
     private ArrayList<Endereco> listaEndereco = new ArrayList<Endereco>();
 
     public Endereco(String estado, String cidade, String rua, String cep, String numRua) {
@@ -30,11 +30,6 @@ public class Endereco {
         this.numRua = numRua;
     }
 
-    Endereco() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
-    
     public int getId() {
         return id;
     }
@@ -90,6 +85,5 @@ public class Endereco {
     public void setListaEndereco(ArrayList<Endereco> listaEndereco) {
         this.listaEndereco = listaEndereco;
     }
-
 
 }
