@@ -421,7 +421,7 @@ public class FPrincipal extends javax.swing.JFrame {
             Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
     */
-       jBoxPOpcao.setSelectedIndex(-1);
+       jBoxPOpcao.setSelectedIndex(0);
        jCampoPDesc.setText("");
        jCampoPValor.setText("");
 
@@ -442,11 +442,6 @@ public void carregarTela() throws SQLException{
             jExtratoTable.setModel(modelo);
     }
 
-    /*
-    
- FAZER FUNCIONAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   
-    
-    */
  
     private void jBoxPOpcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxPOpcaoActionPerformed
         // TODO add your handling code here:
