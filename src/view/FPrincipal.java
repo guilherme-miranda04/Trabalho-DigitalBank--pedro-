@@ -401,28 +401,26 @@ public class FPrincipal extends javax.swing.JFrame {
             if (opcao == "Enviar"){
                 movimentacao = new Movimentacao(0,new Date(), valorTran,"D",jCampoPDesc.getText(),idCliente); 
           try {
-              srvMovimentacao.InserirDadosBanco(movimentacao);
+              srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao);
           } catch (SQLException ex) {
               Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
           }
             }else if (opcao == "Receber"){
                 movimentacao = new Movimentacao(0,new Date(), valorTran,"C",jCampoPDesc.getText(),idCliente);
                 try {
-              srvMovimentacao.InserirDadosBanco(movimentacao);
+              srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao);
           } catch (SQLException ex) {
               Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
           }
         }
-        
-           // movimentacao.setValorTran((Float) jCampoPValor.getValue());
-          //  movimentacao.setDebCre("D");
-           // movimentacao.setDescTran(jCampoPDesc.getText());
-        } else{
+            
+        } else {
             this.limparTela();
-        }
+        } 
         this.limparTela();
     }//GEN-LAST:event_jBotPConcluidoActionPerformed
-private void limparTela(){
+
+    private void limparTela(){
        /* try {       
             this.atualizarListaEquipamento();
         } catch (SQLException ex) {

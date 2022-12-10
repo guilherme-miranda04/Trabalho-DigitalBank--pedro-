@@ -11,11 +11,10 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 
-/**
- *
- * @author guilherme.miranda1
- */
+
+
 public class CadastroContaDAO extends ConexaoBanco {
+
     private int getID;
     public boolean InserirDadosBanco (Cliente cadcliente) {
     

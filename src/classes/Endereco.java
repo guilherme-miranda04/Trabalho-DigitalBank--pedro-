@@ -22,6 +22,19 @@ public class Endereco {
     
     private ArrayList<Endereco> listaEndereco = new ArrayList<Endereco>();
 
+    public Endereco(String estado, String cidade, String rua, String cep, String numRua) {
+        this.estado = estado;
+        this.cidade = cidade;
+        this.rua = rua;
+        this.cep = cep;
+        this.numRua = numRua;
+    }
+
+    Endereco() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     public int getId() {
         return id;
     }

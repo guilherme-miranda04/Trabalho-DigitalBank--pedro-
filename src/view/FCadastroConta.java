@@ -6,10 +6,17 @@
 package view;
 
 import banco.CadastroContaDAO;
+import banco.CadastroDAO2;
+import banco.ConexaoBanco;
 import classes.Cliente;
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 /**
  *
@@ -376,7 +383,7 @@ public class FCadastroConta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCampoCFoneActionPerformed
     
-    public Date ValidarData() throws ParseException{
+    public Date ValidarData(String str) throws ParseException{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
         Date dataNC = sdf.parse(jCampoCDataNasc.getText());
         
@@ -384,7 +391,22 @@ public class FCadastroConta extends javax.swing.JFrame {
     }
     
     private void jBotCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotCCadastrarActionPerformed
+        /*Cliente cliente = new Cliente("teste", "123456", new Date(2000, 11, 21), "M", "8888888","teste@gmail", "123", 1);
+        
+        try{
+            Connection conexao = new ConexaoBanco().getConexao();
+            CadastroDAO2 cadastro = new CadastroDAO2(conexao);
+            cadastro.insert(cliente);
+            
+        } catch (SQLException ex){
+            Logger.getLogger(FCadastroConta.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       */ 
+
+
+
         CadastroContaDAO ccDao = new CadastroContaDAO();
+        
         
         // Salva as informações no Getters and Setters
         cliente.setNome(jCampoCNome.getText());
