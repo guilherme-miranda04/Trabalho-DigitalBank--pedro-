@@ -6,16 +6,10 @@
 package view;
 
 import banco.CadastroContaDAO;
-import banco.CadastroDAO2;
-import banco.ConexaoBanco;
 import classes.Cliente;
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 /**

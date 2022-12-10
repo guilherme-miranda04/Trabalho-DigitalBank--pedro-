@@ -19,4 +19,7 @@ public class Saldo extends MovimentacaoDAO{
         
         FormPrincipal.jTxtPSaldo(saldoA);
     }
+    public void VerificacaoSaldo() {
+        
+    }
 }

@@ -8,7 +8,7 @@ package banco;
 import classes.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
-import java.sql.Date;
+import java.util.Date;
 import java.sql.SQLException;
 
 public class CadastroContaDAO extends ConexaoBanco {

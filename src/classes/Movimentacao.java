@@ -1,4 +1,3 @@
-
 package classes;
 
 import java.util.Date;
@@ -7,12 +6,12 @@ import java.util.Date;
  *
  * @author guilherme.miranda1
  */
-
 public class Movimentacao {
+
     private int id;
     private Date dataTran;
     private Float valorTran;
-    private String  debCre, descTran;
+    private String debCre, descTran;
     private int idCli;
 
     public Movimentacao(int id, Date dataTran, Float valorTran, String debCre, String descTran, int idCli) {
@@ -24,15 +23,15 @@ public class Movimentacao {
         this.idCli = idCli;
     }
 
- 
     public Movimentacao() {
     }
 
-    public Movimentacao(int aInt, java.sql.Date date, float aFloat, String string, String string0, int aInt0) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+    @Override
+    public String toString() {
+        return this.getDescTran();
     }
 
-    
     public int getId() {
         return id;
     }
@@ -72,7 +71,7 @@ public class Movimentacao {
     public void setValorTran(Float valorTran) {
         this.valorTran = valorTran;
     }
-    
+
     public int getIdCli() {
         return idCli;
     }
@@ -80,6 +79,5 @@ public class Movimentacao {
     public void setIdCli(int idCli) {
         this.idCli = idCli;
     }
-    
-    
+
 }
