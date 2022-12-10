@@ -5,9 +5,17 @@
  */
 package view;
 
+import banco.MovimentacaoDAO;
 import classes.Movimentacao;
-import banco.ServicoCliente;
+import banco.ClienteDAO;
+import banco.SimpleTableModel;
 import classes.Cliente;
+import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 /**
  *
  * @author guilherme.miranda1
@@ -20,7 +28,9 @@ public class FPrincipal extends javax.swing.JFrame {
     public FPrincipal() {
         initComponents();
     }
-
+    private Date data;
+    Movimentacao movimentacao = null;
+    MovimentacaoDAO srvMovimentacao = new MovimentacaoDAO();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -58,11 +68,10 @@ public class FPrincipal extends javax.swing.JFrame {
         jCampoPDesc = new javax.swing.JTextArea();
         jTxtPDesc = new javax.swing.JLabel();
         jBotPConcluido = new javax.swing.JButton();
-        jScrollPane3 = new javax.swing.JScrollPane();
-        jPRelatorio = new javax.swing.JTable();
         txtCli = new javax.swing.JLabel();
-        jScrollPane4 = new javax.swing.JScrollPane();
-        jExtratoTxt = new javax.swing.JTextArea();
+        txtData = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jExtratoTable = new javax.swing.JTable();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro Social"));
 
@@ -230,7 +239,7 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jBoxPOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enviar", "Receber", " " }));
+        jBoxPOpcao.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Enviar", "Receber" }));
         jBoxPOpcao.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jBoxPOpcaoActionPerformed(evt);
@@ -294,31 +303,26 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        jPRelatorio.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-                {},
-                {},
-                {},
-                {}
-            },
-            new String [] {
-
-            }
-        ));
-        jScrollPane3.setViewportView(jPRelatorio);
-
         txtCli.setBackground(new java.awt.Color(110, 116, 119));
         txtCli.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         txtCli.setText("id");
 
-        jExtratoTxt.setColumns(20);
-        jExtratoTxt.setRows(5);
-        jExtratoTxt.addContainerListener(new java.awt.event.ContainerAdapter() {
-            public void componentAdded(java.awt.event.ContainerEvent evt) {
-                jExtratoTxtComponentAdded(evt);
+        txtData.setBackground(new java.awt.Color(110, 116, 119));
+        txtData.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        txtData.setText("Data");
+
+        jExtratoTable.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
             }
-        });
-        jScrollPane4.setViewportView(jExtratoTxt);
+        ));
+        jScrollPane3.setViewportView(jExtratoTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -331,14 +335,13 @@ public class FPrincipal extends javax.swing.JFrame {
                         .addComponent(jTxtPOLA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtPUser)
+                        .addGap(70, 70, 70)
+                        .addComponent(txtData)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(txtCli))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(25, 25, 25))
         );
         layout.setVerticalGroup(
@@ -348,20 +351,15 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtPOLA, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jTxtPUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtCli))
+                    .addComponent(txtCli)
+                    .addComponent(txtData))
                 .addGap(35, 35, 35)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                        .addGap(24, 24, 24))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(56, 56, 56)
-                        .addComponent(jScrollPane4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(43, Short.MAX_VALUE))
         );
 
         pack();
@@ -396,18 +394,63 @@ public class FPrincipal extends javax.swing.JFrame {
         Object valor;
         Object opcao = jBoxPOpcao.getSelectedItem();
         Movimentacao movimentacao = new Movimentacao();
+        float valorTran = Float.valueOf(jCampoPValor.getText()).floatValue();
+        int idCliente = Integer.parseInt(txtCli.getText());
         
-        if (opcao == "Enviar"){
-            movimentacao.setValorTran((Float) jCampoPValor.getValue());
-            movimentacao.setDebCre("D");
-            movimentacao.setDescTran(jCampoPDesc.getText());
-        } else if (opcao == "Receber"){
-            movimentacao.setValorTran((Float) jCampoPValor.getValue());
-            movimentacao.setDebCre("C"); 
-            movimentacao.setDescTran(jCampoPDesc.getText());
+        if (jBoxPOpcao.getSelectedIndex() < 0){
+            if (opcao == "Enviar"){
+                movimentacao = new Movimentacao(0,new Date(), valorTran,"D",jCampoPDesc.getText(),idCliente); 
+          try {
+              srvMovimentacao.InserirDadosBanco(movimentacao);
+          } catch (SQLException ex) {
+              Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
+            }else if (opcao == "Receber"){
+                movimentacao = new Movimentacao(0,new Date(), valorTran,"C",jCampoPDesc.getText(),idCliente);
+                try {
+              srvMovimentacao.InserirDadosBanco(movimentacao);
+          } catch (SQLException ex) {
+              Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+          }
         }
+        
+           // movimentacao.setValorTran((Float) jCampoPValor.getValue());
+          //  movimentacao.setDebCre("D");
+           // movimentacao.setDescTran(jCampoPDesc.getText());
+        } else{
+            this.limparTela();
+        }
+        this.limparTela();
     }//GEN-LAST:event_jBotPConcluidoActionPerformed
-/*
+private void limparTela(){
+       /* try {       
+            this.atualizarListaEquipamento();
+        } catch (SQLException ex) {
+            Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    */
+       jBoxPOpcao.setSelectedIndex(-1);
+       jCampoPDesc.setText("");
+       jCampoPValor.setText("");
+
+    }
+
+public void carregarTela() throws SQLException{
+            int idCliente = Integer.parseInt(txtCli.getText());
+            MovimentacaoDAO srv = new MovimentacaoDAO();
+            ArrayList dados = srv.getEquipamentoByQery(idCliente);
+            String [] colunas = new String[] {"Cód. Equip.",
+                                              "Equipamento",
+                                              "Cód. Perif.",
+                                              "Periférico",
+                                              "Estato Perif."                                       
+                                              };
+           
+            SimpleTableModel modelo = new SimpleTableModel(dados, colunas); 
+            jExtratoTable.setModel(modelo);
+    }
+
+    /*
     
  FAZER FUNCIONAR!!!!!!!!!!!!!!!!!!!!!!!!!!!!!   
     
@@ -415,7 +458,7 @@ public class FPrincipal extends javax.swing.JFrame {
  
     private void jBoxPOpcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxPOpcaoActionPerformed
         // TODO add your handling code here:
-        
+   
         //criar movimentafcaoo DAO passando como paremetro a pomvimentacvao e dao faz insert nmo banco
     }//GEN-LAST:event_jBoxPOpcaoActionPerformed
 
@@ -428,12 +471,6 @@ public class FPrincipal extends javax.swing.JFrame {
         
         
     }//GEN-LAST:event_jTxtPSaldoInputMethodTextChanged
-
-    private void jExtratoTxtComponentAdded(java.awt.event.ContainerEvent evt) {//GEN-FIRST:event_jExtratoTxtComponentAdded
-        // TODO add your handling code here:
-        
-        
-    }//GEN-LAST:event_jExtratoTxtComponentAdded
 
     /**
      * @param args the command line arguments
@@ -475,7 +512,7 @@ public class FPrincipal extends javax.swing.JFrame {
     public javax.swing.JTextArea jCampoPDesc;
     public javax.swing.JFormattedTextField jCampoPValor;
     private javax.swing.JComboBox<String> jComboBox2;
-    private javax.swing.JTextArea jExtratoTxt;
+    public javax.swing.JTable jExtratoTable;
     private javax.swing.JFormattedTextField jFormattedTextField1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -483,14 +520,12 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
-    private javax.swing.JTable jPRelatorio;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField5;
@@ -503,6 +538,7 @@ public class FPrincipal extends javax.swing.JFrame {
     public javax.swing.JLabel jTxtPUser;
     private javax.swing.JLabel jTxtPValor;
     public javax.swing.JLabel txtCli;
+    public javax.swing.JLabel txtData;
     // End of variables declaration//GEN-END:variables
 
     public void jTxtPSaldo(String saldo) {

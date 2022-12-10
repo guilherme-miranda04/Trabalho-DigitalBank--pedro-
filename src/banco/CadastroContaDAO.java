@@ -37,6 +37,7 @@ public class CadastroContaDAO extends ConexaoBanco {
             
             // Inserção dados Endereço //
             psE.setInt(1, 0);
+            getID = cadcliente.getId();
             psE.setString(2, cadcliente.getEndereco().getEstado());
             psE.setString(3, cadcliente.getEndereco().getCidade());
             psE.setString(4, cadcliente.getEndereco().getRua());

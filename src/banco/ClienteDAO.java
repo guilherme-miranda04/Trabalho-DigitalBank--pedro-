@@ -19,7 +19,7 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class ServicoCliente extends ConexaoBanco {
+public class ClienteDAO extends ConexaoBanco {
 
     private final ConexaoBanco conexao = new ConexaoBanco();
     private Endereco endereco = new Endereco();

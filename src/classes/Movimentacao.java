@@ -9,42 +9,36 @@ import java.util.Date;
  */
 
 public class Movimentacao {
-    private int id, contaOrigem;
-    private String  debCre, descTran;
+    private int id;
     private Date dataTran;
     private Float valorTran;
-    
-    
-    
-    public Movimentacao(int id, int contaOrigem, String debCre, String descTran, Date dataTran, Float valorTran) {
+    private String  debCre, descTran;
+    private int idCli;
+
+    public Movimentacao(int id, Date dataTran, Float valorTran, String debCre, String descTran, int idCli) {
         this.id = id;
-        this.contaOrigem = contaOrigem;
-        this.debCre = debCre;
-        this.descTran = descTran;
         this.dataTran = dataTran;
         this.valorTran = valorTran;
+        this.debCre = debCre;
+        this.descTran = descTran;
+        this.idCli = idCli;
     }
 
+ 
     public Movimentacao() {
     }
 
-   
+    public Movimentacao(int aInt, java.sql.Date date, float aFloat, String string, String string0, int aInt0) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
-
+    
     public int getId() {
         return id;
     }
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getContaOrigem() {
-        return contaOrigem;
-    }
-
-    public void setContaOrigem(int contaOrigem) {
-        this.contaOrigem = contaOrigem;
     }
 
     public String getDebCre() {
@@ -79,7 +73,13 @@ public class Movimentacao {
         this.valorTran = valorTran;
     }
     
-    
+    public int getIdCli() {
+        return idCli;
+    }
+
+    public void setIdCli(int idCli) {
+        this.idCli = idCli;
+    }
     
     
 }
