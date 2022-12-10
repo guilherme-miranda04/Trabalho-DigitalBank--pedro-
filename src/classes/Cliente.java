@@ -17,6 +17,7 @@ public class Cliente extends Pessoa {
     private String email;
     private String senha;
     private Endereco endereco;
+    private int enderecoID;
     private String idendereco;
 
     private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
@@ -82,6 +83,14 @@ public class Cliente extends Pessoa {
 
     public void setIdendereco(String idendereco) {
         this.idendereco = idendereco;
+    }
+    
+    public int getEnderecoID() {
+        return enderecoID;
+    }
+
+    public void setEnderecoID(int enderecoID) {
+        this.enderecoID = enderecoID;
     }
 
 }

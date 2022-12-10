@@ -1,7 +1,8 @@
-package classes;
+package banco;
 
 import banco.ConexaoBanco;
 import classes.Pessoa;
+import classes.Cliente;
 import classes.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -9,7 +10,10 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import classes.Endereco;
+import classes.Endereco;
 import classes.Movimentacao;
+import classes.Movimentacao;
+import classes.Pessoa;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -41,34 +45,62 @@ public class ServicoCliente extends ConexaoBanco {
         }
     }
 
-    public Pessoa select(int cpf) throws SQLException {
+    public Pessoa selectCliente(String cpf) throws SQLException {
         Pessoa clienteRet = null;
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
-                        "select * from cliente where (cpf = " + cpf + ")")) {
-            rs.first();
+                        "select * from cliente where (cpf = '" + cpf + "')")) {
 
-            clienteRet = new Cliente(rs.getInt("ID"),
-                    rs.getString("telefone"),
-                    rs.getString("email"),
-                    rs.getString("senha"),
-                    rs.getInt("ENDERECO_ID"),
-                    rs.getString("nome"),
-                    rs.getString("cpf"),
-                    rs.getString("sexo"),
-                    rs.getString("ENDERECO_ID"),
-                    rs.getDate("dataNasc"));
+            while (rs.next()) {
 
-        } //int idCli, String telefone, String email, String senha, String dataStr, int id, String nome, String cpf, String sexo, String endereco, Date dataNasc) {
+                int id = rs.getInt("ID");
+                String nome = rs.getString("nome");
+                cpf = rs.getString("cpf");
+                Date dataNasc = rs.getDate("dataNasc");
+                String sexo = rs.getString("sexo");
+                String telefone = rs.getString("telefone");
+                String email = rs.getString("email");
+                int enderecoID = rs.getInt("ENDERECO_ID");
+
+                
+                cliente.setId(id);
+                cliente.setNome(nome);
+                cliente.setCpf(cpf);
+                cliente.setDataNasc(dataNasc);
+                cliente.setSexo(sexo);
+                cliente.setTelefone(telefone);
+                cliente.setEmail(email);
+                cliente.setEnderecoID(enderecoID);
+            
+               
+
+                System.out.println(cliente);
+            }
+
+        } catch (SQLException e) {
+            System.err.format("SQL State: %s\n%s", e.getSQLState(), e.getMessage());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        /*public Cliente(String telefone, String email, String senha) {
+        this.telefone = telefone;
+        this.email = email;
+        this.senha = senha;
+                if(endereco == null){
+            endereco = new Endereco();
+        }
+    }*/
+        
+        
         conexao.close();
         return clienteRet;
     }
 
-    public ArrayList<Cliente> getClienteByLista() throws SQLException {
+ /*  public ArrayList<Cliente> getClienteByLista() throws SQLException {
         ArrayList<Cliente> clienteRet = new ArrayList<Cliente>();
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
-                        "select * from cliente order by ID")) {
+                        "select * from cliente where (ID = " + id + ")")) {
 
             while (rs.next()) {
                 clienteRet.add(new Cliente(rs.getInt("ID"),
@@ -86,7 +118,7 @@ public class ServicoCliente extends ConexaoBanco {
         conexao.close();
         return clienteRet;
     }
-
+*/
     public void insertEndereco(Endereco endereco) throws SQLException {
         try (PreparedStatement pst = conexao.getConexao().prepareStatement("insert into endereco (ID, estado, cidade, rua, cep, numRua)"
                 + " values "
@@ -123,7 +155,7 @@ public class ServicoCliente extends ConexaoBanco {
         return enderecoRet;
     }
 
-    public ArrayList<Endereco> getEnderecoByLista() throws SQLException {
+   /* public ArrayList<Endereco> getEnderecoByLista() throws SQLException {
         ArrayList<Endereco> enderecoRet = new ArrayList<Endereco>();
         try (Statement st = conexao.getConexao().createStatement();
                 ResultSet rs = st.executeQuery(
@@ -142,7 +174,8 @@ public class ServicoCliente extends ConexaoBanco {
         conexao.close();
         return enderecoRet;
     }
-
+*/
+    
     public void insertMovimentacao(Movimentacao movimentacao) throws SQLException {
         try (PreparedStatement pst = conexao.getConexao().prepareStatement("insert into movimentacao (ID, contaOrigem, dataTran, valorTran,"
                 + "debCre, desTran, CLIENTE_ID)"
