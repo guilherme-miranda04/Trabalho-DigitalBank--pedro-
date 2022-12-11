@@ -24,7 +24,6 @@ public class MovimentacaoDAO extends ConexaoBanco {
     FPrincipal formularioP = new FPrincipal();
 
     public boolean InserirDadosBancoMovimentacao(Movimentacao movimentacao) {
-        PreparedStatement psE = null;
         Connection con = getConexao();
 
         // Seleciona do Banco Movimentação //
@@ -32,7 +31,7 @@ public class MovimentacaoDAO extends ConexaoBanco {
         String sqlIdCliente = "select MAX(e.CLIENTE_ID) from movimentacao e where (CLIENTE_ID = " + formularioP.txtCli + ")";
 
         try {
-            psE = con.prepareStatement(sqlMovi);
+            PreparedStatement psE = con.prepareStatement(sqlMovi);
 
             // Inserção dados Movimentacao //
             psE.setInt(1, 0);

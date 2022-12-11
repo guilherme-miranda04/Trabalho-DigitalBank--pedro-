@@ -6,6 +6,8 @@
 package classes;
 
 import banco.MovimentacaoDAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
 import view.FPrincipal;
 
 /**
@@ -18,13 +20,16 @@ public class Saldo extends MovimentacaoDAO{
         
         FormPrincipal.jTxtPSaldo(saldoA);
     }
-    public void VerificacaoSaldo() {
-        String sql = "select * from VWSALDO";
+    public void VerificacaoSaldo(int IdConta) {
+        Connection con = getConexao();
         
-        // fazer um if para pegar as informações da respectiva conta
+        String sqlsaldo = "select * from VWSALDO where CLIENTE_ID = ?";
         
-        /*if (idCliente) {
-            
-        } */
+        try{        
+            PreparedStatement psE = con.prepareStatement(sqlsaldo);
+        }catch {
+                
+        }
+        
     }
 }

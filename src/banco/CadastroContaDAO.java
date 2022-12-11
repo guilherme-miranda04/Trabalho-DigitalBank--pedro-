@@ -8,7 +8,6 @@ package banco;
 import classes.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
-import java.util.Date;
 import java.sql.SQLException;
 
 public class CadastroContaDAO extends ConexaoBanco {
@@ -16,21 +15,15 @@ public class CadastroContaDAO extends ConexaoBanco {
     private int getID;
 
     public boolean InserirDadosBanco(Cliente cadcliente) {
-
-        PreparedStatement psP = null;
-        PreparedStatement psE = null;
-        PreparedStatement psI = null;
         Connection con = getConexao();
 
         // Seleciona do Banco Clientes a informação *CPF* //
         String sqlEnd = "insert into endereco (ID, estado, cidade, rua, cep, numRua) values (?,?,?,?,?,?)";
         String sqlCliente = "insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email, senha, ENDERECO_ID) values (?,?,?,?,?,?,?,?,?)";
-        String sqlIdEndereco = "select MAX(e.ID) from endereco e";
 
         try {
-            psE = con.prepareStatement(sqlEnd);
-            psP = con.prepareStatement(sqlCliente);
-            psI = con.prepareStatement(sqlIdEndereco);
+            PreparedStatement psE = con.prepareStatement(sqlEnd);
+            PreparedStatement psP = con.prepareStatement(sqlCliente);
 
             // Inserção dados Endereço //
             psE.setInt(1, 0);
@@ -46,13 +39,33 @@ public class CadastroContaDAO extends ConexaoBanco {
             psP.setInt(1, 0);
             psP.setString(2, cadcliente.getNome());
             psP.setString(3, cadcliente.getCpf());
-// Verificar           psP.setDate(4, new Date(cadcliente.getDataNasc().getTime()));
+            psP.setDate(4, (java.sql.Date) cadcliente.getDataNasc());
             psP.setString(5, cadcliente.getSexo());
             psP.setString(6, cadcliente.getTelefone());
             psP.setString(7, cadcliente.getEmail());
             psP.setString(8, cadcliente.getSenha());
-            psP.setString(9, sqlIdEndereco);
+            psP.setInt(9, getID);
             psP.executeUpdate();
+            
+            close();
+            return true;
+        } catch (SQLException e) {
+            close();
+            System.err.println(e);
+            return false;
+        }
+    }
+    
+    public boolean ResultDadosBanco(Cliente cadcliente) {
+        Connection con = getConexao();
+        
+        String sqlIdEndereco = "select e.ID from endereco e order by e.id desc limit 1";
+        
+        try {
+            PreparedStatement psI = con.prepareStatement(sqlIdEndereco);
+            
+            psI.setString(1, sqlIdEndereco);
+            
             close();
             return true;
         } catch (SQLException e) {

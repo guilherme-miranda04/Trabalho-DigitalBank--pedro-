@@ -379,7 +379,7 @@ public class FCadastroConta extends javax.swing.JFrame {
     
     public Date ValidarData(String str) throws ParseException{
         SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date dataNC = sdf.parse(jCampoCDataNasc.getText());
+        Date dataNC = (Date) sdf.parse(jCampoCDataNasc.getText());
         
         return dataNC;
     }
