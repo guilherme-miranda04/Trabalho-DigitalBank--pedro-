@@ -14,12 +14,17 @@ import view.FPrincipal;
  */
 public class Saldo extends MovimentacaoDAO{
     FPrincipal FormPrincipal = new FPrincipal();
-    MovimentacaoDAO movimentacao = new MovimentacaoDAO();
     public Saldo (String saldoA) {
         
         FormPrincipal.jTxtPSaldo(saldoA);
     }
     public void VerificacaoSaldo() {
+        String sql = "select * from VWSALDO";
         
+        // fazer um if para pegar as informações da respectiva conta
+        
+        /*if (idCliente) {
+            
+        } */
     }
 }
