@@ -13,6 +13,7 @@ import java.util.Date;
  * @author hercilio.neto1
  */
 public class Cliente {
+
     private int id;
     private String nome;
     private String cpf;
@@ -24,13 +25,11 @@ public class Cliente {
     private Endereco endereco;
     private int enderecoID;
     private String idendereco;
-   
-
 
     private ArrayList<Cliente> listaCliente = new ArrayList<Cliente>();
 
     public Cliente() {
-        if(endereco == null){
+        if (endereco == null) {
             endereco = new Endereco(sexo, nome, cpf, cpf, nome);
         }
     }
@@ -39,7 +38,7 @@ public class Cliente {
         this.telefone = telefone;
         this.email = email;
         this.senha = senha;
-                if(endereco == null){
+        if (endereco == null) {
             endereco = new Endereco(email, email, cpf, cpf, nome);
         }
     }
@@ -55,8 +54,6 @@ public class Cliente {
         this.senha = senha;
         this.enderecoID = enderecoID;
     }
-    
-    
 
     public Cliente(String nome, String cpf, Date dataNasc, String sexo, String telefone, String email, String senha, int enderecoID) {
         this.nome = nome;
@@ -109,10 +106,6 @@ public class Cliente {
         this.sexo = sexo;
     }
 
- 
-    
-     
-    
     public String getTelefone() {
         return telefone;
     }
@@ -160,7 +153,7 @@ public class Cliente {
     public void setIdendereco(String idendereco) {
         this.idendereco = idendereco;
     }
-    
+
     public int getEnderecoID() {
         return enderecoID;
     }

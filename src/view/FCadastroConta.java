@@ -7,9 +7,14 @@ package view;
 
 import banco.CadastroContaDAO;
 import classes.Cliente;
+import java.time.ZoneId;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -377,35 +382,24 @@ public class FCadastroConta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCampoCFoneActionPerformed
     
-    public Date ValidarData(String str) throws ParseException{
-        SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-        Date dataNC = (Date) sdf.parse(jCampoCDataNasc.getText());
+    public Date ValidarData(Date dataNC) throws ParseException{
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        dataNC = sdf.parse(dataNC.toString());
         
         return dataNC;
     }
     
     private void jBotCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotCCadastrarActionPerformed
-        /*Cliente cliente = new Cliente("teste", "123456", new Date(2000, 11, 21), "M", "8888888","teste@gmail", "123", 1);
-        
-        try{
-            Connection conexao = new ConexaoBanco().getConexao();
-            CadastroDAO2 cadastro = new CadastroDAO2(conexao);
-            cadastro.insert(cliente);
-            
-        } catch (SQLException ex){
-            Logger.getLogger(FCadastroConta.class.getName()).log(Level.SEVERE, null, ex);
-        }
-       */ 
-
-
 
         CadastroContaDAO ccDao = new CadastroContaDAO();
-        
-        
+        String stringDate = jCampoCDataNasc.getText();
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        LocalDate date = LocalDate.parse(stringDate,formatter);
+        Date data = Date.from(date.atStartOfDay(ZoneId.systemDefault()).toInstant());
         // Salva as informações no Getters and Setters
         cliente.setNome(jCampoCNome.getText());
         cliente.setCpf(JCampoCadCPF.getText());
-        cliente.setDataNasc(dataNC);
+        cliente.setDataNasc(data); // retornando um valor null
         cliente.setSexo((String) jBoxCSexo.getSelectedItem());
         cliente.setTelefone(jCampoCFone.getText());
         cliente.setEmail(jCampoCEmail.getText());
@@ -421,6 +415,9 @@ public class FCadastroConta extends javax.swing.JFrame {
         
         FLogin ViewLogin = new FLogin();
         ViewLogin.setVisible(true);
+        /**
+         * @Dispose - Fecha as janelas atribuidas a aquela janela
+         */
         dispose();
         
     }//GEN-LAST:event_jBotCCadastrarActionPerformed

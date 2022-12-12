@@ -137,7 +137,7 @@ public class FLogin extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jBotLEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotLEntrarActionPerformed
-        
+        this.dispose();
     }//GEN-LAST:event_jBotLEntrarActionPerformed
 
     private void jCampoLCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoLCPFActionPerformed

@@ -11,7 +11,6 @@ import classes.Saldo;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
@@ -73,6 +72,7 @@ public class FPrincipal extends javax.swing.JFrame {
         txtData = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
         jExtratoTable = new javax.swing.JTable();
+        jBotaoSair = new javax.swing.JButton();
 
         jPanel2.setBorder(javax.swing.BorderFactory.createTitledBorder("Cadastro Social"));
 
@@ -325,6 +325,13 @@ public class FPrincipal extends javax.swing.JFrame {
         ));
         jScrollPane3.setViewportView(jExtratoTable);
 
+        jBotaoSair.setText("Sair");
+        jBotaoSair.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotaoSairActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -344,6 +351,10 @@ public class FPrincipal extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(35, 35, 35))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jBotaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -354,13 +365,15 @@ public class FPrincipal extends javax.swing.JFrame {
                     .addComponent(jTxtPUser, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtCli)
                     .addComponent(txtData))
-                .addGap(35, 35, 35)
+                .addGap(30, 30, 30)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(15, 15, 15)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addGap(15, 15, 15)
+                .addComponent(jBotaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(15, 15, 15))
         );
 
         pack();
@@ -498,6 +511,14 @@ public class FPrincipal extends javax.swing.JFrame {
         jTxtPSaldo.setText(saldo+"");
     }//GEN-LAST:event_formWindowActivated
 
+    private void jBotaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotaoSairActionPerformed
+        FLogin formlogin = new FLogin();
+        
+        this.dispose();
+        formlogin.setVisible(true);
+        
+    }//GEN-LAST:event_jBotaoSairActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -534,6 +555,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jBotPConcluido;
+    private javax.swing.JButton jBotaoSair;
     public javax.swing.JComboBox<String> jBoxPOpcao;
     public javax.swing.JTextArea jCampoPDesc;
     public javax.swing.JFormattedTextField jCampoPValor;

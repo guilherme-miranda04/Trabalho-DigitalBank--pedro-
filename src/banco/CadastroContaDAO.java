@@ -8,7 +8,11 @@ package banco;
 import classes.Cliente;
 import java.sql.PreparedStatement;
 import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class CadastroContaDAO extends ConexaoBanco {
 
@@ -16,13 +20,13 @@ public class CadastroContaDAO extends ConexaoBanco {
 
     public boolean InserirDadosBanco(Cliente cadcliente) {
         Connection con = getConexao();
-
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         // Seleciona do Banco Clientes a informação *CPF* //
         String sqlEnd = "insert into endereco (ID, estado, cidade, rua, cep, numRua) values (?,?,?,?,?,?)";
         String sqlCliente = "insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email, senha, ENDERECO_ID) values (?,?,?,?,?,?,?,?,?)";
 
         try {
-            PreparedStatement psE = con.prepareStatement(sqlEnd);
+            PreparedStatement psE = con.prepareStatement(sqlEnd,Statement.RETURN_GENERATED_KEYS);
             PreparedStatement psP = con.prepareStatement(sqlCliente);
 
             // Inserção dados Endereço //
@@ -34,12 +38,17 @@ public class CadastroContaDAO extends ConexaoBanco {
             psE.setString(5, cadcliente.getEndereco().getCep());
             psE.setString(6, cadcliente.getEndereco().getNumRua());
             psE.executeUpdate();
+             ResultSet generatedKeys = psE.getGeneratedKeys();
+                if (generatedKeys.next()) {
+               getID = generatedKeys.getInt(1);
+                }
 
             // Inserção dados Pessoa //
             psP.setInt(1, 0);
             psP.setString(2, cadcliente.getNome());
             psP.setString(3, cadcliente.getCpf());
-            psP.setDate(4, (java.sql.Date) cadcliente.getDataNasc());
+            String date = sdf.format(cadcliente.getDataNasc());
+            psP.setString(4, date);
             psP.setString(5, cadcliente.getSexo());
             psP.setString(6, cadcliente.getTelefone());
             psP.setString(7, cadcliente.getEmail());

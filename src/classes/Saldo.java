@@ -6,7 +6,6 @@
 package classes;
 
 import banco.ConexaoBanco;
-import banco.MovimentacaoDAO;
 import java.sql.*;
 import view.FPrincipal;
 
