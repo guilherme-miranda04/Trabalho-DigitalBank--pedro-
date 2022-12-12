@@ -27,7 +27,7 @@ public class CadastroContaDAO extends ConexaoBanco {
 
             // Inserção dados Endereço //
             psE.setInt(1, 0);
-            getID = cadcliente.getId();
+            getID = cadcliente.getEnderecoID();
             psE.setString(2, cadcliente.getEndereco().getEstado());
             psE.setString(3, cadcliente.getEndereco().getCidade());
             psE.setString(4, cadcliente.getEndereco().getRua());
@@ -64,7 +64,7 @@ public class CadastroContaDAO extends ConexaoBanco {
         try {
             PreparedStatement psI = con.prepareStatement(sqlIdEndereco);
             
-            psI.setString(1, sqlIdEndereco);
+            //cadcliente.setEnderecoID(psI.getString(1, sqlIdEndereco));
             
             close();
             return true;
