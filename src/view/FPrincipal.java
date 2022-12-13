@@ -8,6 +8,7 @@ package view;
 import banco.MovimentacaoDAO;
 import classes.Movimentacao;
 import classes.Saldo;
+import java.awt.Color;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -445,6 +446,9 @@ public class FPrincipal extends javax.swing.JFrame {
             Object descricaotrans = listamovi.get(i).getDescTran();
             //String cliente_id = clientes.get(i).getTelefone2();
             Object[] data = {datatrans, valor, tipo, descricaotrans};
+//            if (listamovi.get(i).getDebCre() == "C") {
+//                jExtratoTable.setForeground(Color.RED);
+//            }
             if (listamovi.get(i).getDescTran() != "Zeramento" && listamovi.get(i).getValorTran() > 0) {
                 tbModel.addRow(data);
             }
@@ -501,6 +505,9 @@ public class FPrincipal extends javax.swing.JFrame {
             Object descricaotrans = listamovi.get(i).getDescTran();
             //String cliente_id = clientes.get(i).getTelefone2();
             Object[] datab = {datatrans, valor, tipo, descricaotrans};
+//            if ((listamovi.get(i).getDebCre().equals("C"))) {
+//                jExtratoTable.setForeground(Color.RED);
+//            }
             if (listamovi.get(i).getDescTran() != "Zeramento" && listamovi.get(i).getValorTran() > 0) {
                 tbModel.addRow(datab);
             }

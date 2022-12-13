@@ -8,11 +8,9 @@ package banco;
 import java.util.ArrayList;
 import javax.swing.table.AbstractTableModel;
 
-
 public class SimpleTableModel extends AbstractTableModel {
 
     private ArrayList linhas = null;
-
     private String[] colunas = null;
 
     public ArrayList getLinhas() {
@@ -57,4 +55,3 @@ public class SimpleTableModel extends AbstractTableModel {
         this.setLinhas(dados);
     }
 }
-
