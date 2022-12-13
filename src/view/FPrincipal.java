@@ -15,7 +15,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import prbancodigital.PrBancoDigital;
 
 /**
  *
@@ -338,7 +340,7 @@ public class FPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jTxtPOLA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -346,7 +348,7 @@ public class FPrincipal extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addComponent(txtCli)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtData))
+                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -400,11 +402,6 @@ public class FPrincipal extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jTextField6ActionPerformed
 
-    //PRIVATE VOID INSERIR(){}
-    private void BuscarSaldo(int IDCLIE) {
-        //    COMPSALDODATELA := VerificacaoSaldo}
-    }
-
     private void jBotPConcluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotPConcluidoActionPerformed
         // TODO add your handling code here:
         Object valor;
@@ -413,31 +410,20 @@ public class FPrincipal extends javax.swing.JFrame {
         float valorTran = Float.valueOf(jCampoPValor.getText()).floatValue();
         int idCliente = Integer.parseInt(txtCli.getText());
 
-        if (jBoxPOpcao.getSelectedIndex() < 0) {
-            int id = Integer.parseInt(txtCli.getText());
-            String tipo = "";
-            if (opcao == "Enviar") {
-                tipo = "D";
-            } else if (opcao == "Receber") {
-                tipo = "C"; 
-            }
-            movimentacao = new Movimentacao(0, new Date(), valorTran, tipo, jCampoPDesc.getText(), idCliente);
-            srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao,id);
-
-        } else {
-            this.limparTela();
+        int id = Integer.parseInt(txtCli.getText());
+        String tipo = "";
+        if (opcao == "Enviar") {
+            tipo = "D";
+        } else if (opcao == "Receber") {
+            tipo = "C";
         }
+        movimentacao = new Movimentacao(0, new Date(), valorTran, tipo, jCampoPDesc.getText(), idCliente);
+        srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao, id);
         this.limparTela();
-        
+
     }//GEN-LAST:event_jBotPConcluidoActionPerformed
 
     private void limparTela() {
-        /* try {       
-            this.atualizarListaEquipamento();
-        } catch (SQLException ex) {
-            Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
-        }
-         */
         jBoxPOpcao.setSelectedIndex(0);
         jCampoPDesc.setText("");
         jCampoPValor.setText("");
@@ -446,17 +432,19 @@ public class FPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < listamovi.size(); i++) {
             Object id = listamovi.get(i).getId();
             Object datatrans = listamovi.get(i).getDataTran();
-            Object valor  = listamovi.get(i).getValorTran();
+            Object valor = listamovi.get(i).getValorTran();
             Object tipo = listamovi.get(i).getDebCre();
             Object descricaotrans = listamovi.get(i).getDescTran();
             //String cliente_id = clientes.get(i).getTelefone2();
-            Object[] data = {datatrans,valor,tipo, descricaotrans};
-            tbModel.addRow(data);
+            Object[] data = {datatrans, valor, tipo, descricaotrans};
+            if (listamovi.get(i).getValorTran() != 0) {
+                tbModel.addRow(data);
+            }
         }
         int id = Integer.parseInt(txtCli.getText());
         Saldo sa = new Saldo();
         float saldo = sa.VerificacaoSaldo(id);
-        jTxtPSaldo.setText(saldo+"");
+        jTxtPSaldo.setText(saldo + "");
     }
 
     public void carregarTela() throws SQLException {
@@ -486,7 +474,9 @@ public class FPrincipal extends javax.swing.JFrame {
         LocalDate localDate = LocalDate.now();
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String data = localDate.format(dateTimeFormatter);
-        txtData.setText(data); 
+        // Inserir a informação no txt
+        //jTxtPUser.setText();
+        txtData.setText(data);
         txtCli.setVisible(false);
         try {
             listamovi = srvMovimentacao.selectMovimentacao(Integer.parseInt(txtCli.getText()));
@@ -498,25 +488,29 @@ public class FPrincipal extends javax.swing.JFrame {
         for (int i = 0; i < listamovi.size(); i++) {
             Object id = listamovi.get(i).getId();
             Object datatrans = LocalDate.parse(listamovi.get(i).getDataTran().toString()).format(dateTimeFormatter);
-            Object valor  = listamovi.get(i).getValorTran();
+            Object valor = listamovi.get(i).getValorTran();
             Object tipo = listamovi.get(i).getDebCre();
             Object descricaotrans = listamovi.get(i).getDescTran();
             //String cliente_id = clientes.get(i).getTelefone2();
-            Object[] datab = {datatrans,valor,tipo, descricaotrans};
-            tbModel.addRow(datab);
+            Object[] datab = {datatrans, valor, tipo, descricaotrans};
+            if (listamovi.get(i).getValorTran() != 0) {
+                tbModel.addRow(datab);
+            }
         }
         int id = Integer.parseInt(txtCli.getText());
         Saldo sa = new Saldo();
         float saldo = sa.VerificacaoSaldo(id);
-        jTxtPSaldo.setText(saldo+"");
+        jTxtPSaldo.setText(saldo + "");
     }//GEN-LAST:event_formWindowActivated
 
     private void jBotaoSairActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotaoSairActionPerformed
-        FLogin formlogin = new FLogin();
-        
+        String[] args = null;
+        /**
+         * @Dispose - Fecha as janelas atribuidas a aquela janela
+         */
         this.dispose();
-        formlogin.setVisible(true);
-        
+        PrBancoDigital.main(args);
+
     }//GEN-LAST:event_jBotaoSairActionPerformed
 
     /**

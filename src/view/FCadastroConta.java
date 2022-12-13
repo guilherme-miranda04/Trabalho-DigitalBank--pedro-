@@ -13,6 +13,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
+import prbancodigital.PrBancoDigital;
 
 /**
  *
@@ -410,12 +411,16 @@ public class FCadastroConta extends javax.swing.JFrame {
         cliente.getEndereco().setCep(jCampoCCEP.getText());
         ccDao.InserirDadosBanco(cliente);
         
-        FLogin ViewLogin = new FLogin();
-        ViewLogin.setVisible(true);
+        String[] args = null;
         /**
          * @Dispose - Fecha as janelas atribuidas a aquela janela
          */
-        dispose();
+        
+        PrBancoDigital.main(args);
+       // FLogin ViewLogin = new FLogin();
+       // ViewLogin.setVisible(true);
+        
+       dispose();
         
     }//GEN-LAST:event_jBotCCadastrarActionPerformed
 

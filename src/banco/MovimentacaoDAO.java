@@ -13,6 +13,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import view.FPrincipal;
 
@@ -24,21 +25,22 @@ public class MovimentacaoDAO extends ConexaoBanco {
     //FPrincipal formularioP = new FPrincipal();
     public boolean InserirDadosBancoMovimentacao(Movimentacao movimentacao, int id) {
         Connection con = getConexao();
-
+        SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd hh:mm:ss");
         // Seleciona do Banco Movimentação //
         String sqlMovi = "insert into movimentacao (ID, dataTran, valorTran, debCre, descTran, CLIENTE_ID) values (?,?,?,?,?,?)";
-        String sqlIdCliente = "select MAX(e.CLIENTE_ID) from movimentacao e where (CLIENTE_ID = " + id + ")";
+        //String sqlIdCliente = "select MAX(e.CLIENTE_ID) from movimentacao e where (CLIENTE_ID = " + id + ")";
 
         try {
             PreparedStatement psE = con.prepareStatement(sqlMovi);
 
             // Inserção dados Movimentacao //
             psE.setInt(1, 0);
-            psE.setDate(2, (Date) movimentacao.getDataTran());
+            String date = sdf.format(movimentacao.getDataTran());
+            psE.setString(2, date);
             psE.setFloat(3, movimentacao.getValorTran());
             psE.setString(4, movimentacao.getDebCre());
             psE.setString(5, movimentacao.getDescTran());
-            psE.setString(6, sqlIdCliente);
+            psE.setInt(6, id);
             psE.executeUpdate();
 
             close();

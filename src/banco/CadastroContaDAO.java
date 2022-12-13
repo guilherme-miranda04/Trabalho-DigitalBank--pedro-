@@ -63,23 +63,4 @@ public class CadastroContaDAO extends ConexaoBanco {
             return false;
         }
     }
-    
-    public boolean ResultDadosBanco(Cliente cadcliente) {
-        Connection con = getConexao();
-        
-        String sqlIdEndereco = "select e.ID from endereco e order by e.id desc limit 1";
-        
-        try {
-            PreparedStatement psI = con.prepareStatement(sqlIdEndereco);
-            
-            //cadcliente.setEnderecoID(psI.getString(1, sqlIdEndereco));
-            
-            close();
-            return true;
-        } catch (SQLException e) {
-            close();
-            System.err.println(e);
-            return false;
-        }
-    }
 }
