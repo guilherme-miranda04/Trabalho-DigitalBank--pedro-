@@ -5,10 +5,7 @@
  */
 package banco;
 
-import classes.Login;
 import banco.ConexaoBanco;
-import banco.ConexaoBanco;
-import classes.Login;
 import classes.Login;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
