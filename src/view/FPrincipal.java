@@ -240,7 +240,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder("Movimentação"));
 
-        jCampoPValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        jCampoPValor.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jCampoPValor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCampoPValorActionPerformed(evt);
@@ -324,7 +324,15 @@ public class FPrincipal extends javax.swing.JFrame {
             new String [] {
                 "Data", "Valor", "Tipo", "Descrição"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane3.setViewportView(jExtratoTable);
 
         jBotaoSair.setText("Sair");
@@ -348,15 +356,15 @@ public class FPrincipal extends javax.swing.JFrame {
                         .addGap(53, 53, 53)
                         .addComponent(txtCli)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addGap(35, 35, 35))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jBotaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jBotaoSair)
+                .addGap(15, 15, 15))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -373,9 +381,9 @@ public class FPrincipal extends javax.swing.JFrame {
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 365, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jBotaoSair, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addGap(18, 18, 18))
         );
 
         pack();
@@ -437,7 +445,7 @@ public class FPrincipal extends javax.swing.JFrame {
             Object descricaotrans = listamovi.get(i).getDescTran();
             //String cliente_id = clientes.get(i).getTelefone2();
             Object[] data = {datatrans, valor, tipo, descricaotrans};
-            if (listamovi.get(i).getValorTran() != 0) {
+            if (listamovi.get(i).getDescTran() != "Zeramento" && listamovi.get(i).getValorTran() > 0) {
                 tbModel.addRow(data);
             }
         }
@@ -493,7 +501,7 @@ public class FPrincipal extends javax.swing.JFrame {
             Object descricaotrans = listamovi.get(i).getDescTran();
             //String cliente_id = clientes.get(i).getTelefone2();
             Object[] datab = {datatrans, valor, tipo, descricaotrans};
-            if (listamovi.get(i).getValorTran() != 0) {
+            if (listamovi.get(i).getDescTran() != "Zeramento" && listamovi.get(i).getValorTran() > 0) {
                 tbModel.addRow(datab);
             }
         }

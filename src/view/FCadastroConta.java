@@ -49,20 +49,20 @@ public class FCadastroConta extends javax.swing.JFrame {
         jTxtCEmail = new javax.swing.JLabel();
         jTxtCSexo = new javax.swing.JLabel();
         jBoxCSexo = new javax.swing.JComboBox<>();
-        jCampoCFone = new javax.swing.JTextField();
         jCampoCDataNasc = new javax.swing.JFormattedTextField();
         JCampoCadCPF = new javax.swing.JFormattedTextField();
+        jCampoCFone = new javax.swing.JFormattedTextField();
         jPanel2 = new javax.swing.JPanel();
         jTxtCUF = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         jCampoCidade = new javax.swing.JTextField();
         jCampoCRua = new javax.swing.JTextField();
         jTxtCRua = new javax.swing.JLabel();
-        jCampoCCEP = new javax.swing.JTextField();
         jTxtCCEP = new javax.swing.JLabel();
         jTxtCNum = new javax.swing.JLabel();
         jCampoCNum = new javax.swing.JTextField();
         jBoxCUF = new javax.swing.JComboBox<>();
+        jCampoCCEP = new javax.swing.JFormattedTextField();
         jLabel12 = new javax.swing.JLabel();
         jBotCCadastrar = new javax.swing.JButton();
         jCampoCSenha = new javax.swing.JPasswordField();
@@ -106,12 +106,6 @@ public class FCadastroConta extends javax.swing.JFrame {
             }
         });
 
-        jCampoCFone.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCampoCFoneActionPerformed(evt);
-            }
-        });
-
         try {
             jCampoCDataNasc.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("##/##/####")));
         } catch (java.text.ParseException ex) {
@@ -121,6 +115,12 @@ public class FCadastroConta extends javax.swing.JFrame {
 
         try {
             JCampoCadCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
+        try {
+            jCampoCFone.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("(##) # ####-####")));
         } catch (java.text.ParseException ex) {
             ex.printStackTrace();
         }
@@ -173,8 +173,8 @@ public class FCadastroConta extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtCFone)
                     .addComponent(jTxtCCPF)
-                    .addComponent(jCampoCFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(JCampoCadCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(JCampoCadCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCampoCFone, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTxtCDataNasc)
@@ -210,12 +210,6 @@ public class FCadastroConta extends javax.swing.JFrame {
 
         jTxtCRua.setText("Rua:");
 
-        jCampoCCEP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCampoCCEPActionPerformed(evt);
-            }
-        });
-
         jTxtCCEP.setText("CEP:");
 
         jTxtCNum.setText("Nº:");
@@ -233,6 +227,12 @@ public class FCadastroConta extends javax.swing.JFrame {
             }
         });
 
+        try {
+            jCampoCCEP.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("#####-###")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -241,22 +241,23 @@ public class FCadastroConta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTxtCCEP)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
-                                .addComponent(jCampoCCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTxtCRua)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(jCampoCRua, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jTxtCNum)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jCampoCNum, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTxtCRua)
+                            .addComponent(jTxtCCEP))
+                        .addGap(28, 28, 28)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jCampoCRua, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTxtCNum)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jCampoCNum, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jCampoCCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTxtCUF)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGap(14, 14, 14)
                         .addComponent(jBoxCUF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(20, 20, 20)
                         .addComponent(jLabel8)
@@ -281,8 +282,8 @@ public class FCadastroConta extends javax.swing.JFrame {
                     .addComponent(jCampoCNum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCampoCCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtCCEP))
+                    .addComponent(jTxtCCEP)
+                    .addComponent(jCampoCCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -319,7 +320,7 @@ public class FCadastroConta extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(8, 8, 8)
                         .addComponent(jTxtCSenha)
-                        .addGap(18, 18, 18)
+                        .addGap(20, 20, 20)
                         .addComponent(jCampoCSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 109, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(38, 38, 38))
         );
@@ -342,6 +343,7 @@ public class FCadastroConta extends javax.swing.JFrame {
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jCampoCNomeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoCNomeActionPerformed
@@ -364,10 +366,6 @@ public class FCadastroConta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCampoCRuaActionPerformed
 
-    private void jCampoCCEPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoCCEPActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCampoCCEPActionPerformed
-
     private void jCampoCNumActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoCNumActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jCampoCNumActionPerformed
@@ -375,10 +373,6 @@ public class FCadastroConta extends javax.swing.JFrame {
     private void jBoxCSexoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxCSexoActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jBoxCSexoActionPerformed
-
-    private void jCampoCFoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoCFoneActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jCampoCFoneActionPerformed
     
     public Date ValidarData(Date dataNC) throws ParseException{
         SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
@@ -465,10 +459,10 @@ public class FCadastroConta extends javax.swing.JFrame {
     public javax.swing.JButton jBotCCadastrar;
     public javax.swing.JComboBox<String> jBoxCSexo;
     public javax.swing.JComboBox<String> jBoxCUF;
-    public javax.swing.JTextField jCampoCCEP;
+    private javax.swing.JFormattedTextField jCampoCCEP;
     public javax.swing.JFormattedTextField jCampoCDataNasc;
     public javax.swing.JTextField jCampoCEmail;
-    public javax.swing.JTextField jCampoCFone;
+    private javax.swing.JFormattedTextField jCampoCFone;
     public javax.swing.JTextField jCampoCNome;
     public javax.swing.JTextField jCampoCNum;
     public javax.swing.JTextField jCampoCRua;
