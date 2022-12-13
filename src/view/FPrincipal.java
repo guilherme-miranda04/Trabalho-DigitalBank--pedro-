@@ -8,7 +8,6 @@ package view;
 import banco.MovimentacaoDAO;
 import classes.Movimentacao;
 import classes.Saldo;
-import java.awt.Color;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -16,7 +15,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import prbancodigital.PrBancoDigital;
 
@@ -449,7 +447,7 @@ public class FPrincipal extends javax.swing.JFrame {
 //            if (listamovi.get(i).getDebCre() == "C") {
 //                jExtratoTable.setForeground(Color.RED);
 //            }
-            if (listamovi.get(i).getDescTran() != "Zeramento" && listamovi.get(i).getValorTran() > 0) {
+            if (listamovi.get(i).getDescTran() != ("Zeramento") && listamovi.get(i).getValorTran() > 0) {
                 tbModel.addRow(data);
             }
         }
@@ -505,10 +503,14 @@ public class FPrincipal extends javax.swing.JFrame {
             Object descricaotrans = listamovi.get(i).getDescTran();
             //String cliente_id = clientes.get(i).getTelefone2();
             Object[] datab = {datatrans, valor, tipo, descricaotrans};
+            /** 
+             *  Este procedimento ia fazer a alteração da coloração do texto conforme o tipo buscado no banco de dados e ia imprimir isso no extrato
+             *  Exemplo: "Débito (vermelho) / Crédito (verde) //
+             */ 
 //            if ((listamovi.get(i).getDebCre().equals("C"))) {
 //                jExtratoTable.setForeground(Color.RED);
 //            }
-            if (listamovi.get(i).getDescTran() != "Zeramento" && listamovi.get(i).getValorTran() > 0) {
+            if (listamovi.get(i).getDescTran() != ("Zeramento") && listamovi.get(i).getValorTran() > 0) {
                 tbModel.addRow(datab);
             }
         }
