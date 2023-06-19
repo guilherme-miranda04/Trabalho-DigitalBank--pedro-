@@ -29,7 +29,7 @@ public class ControllerLogin implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         boolean loginSucesso;
 
-        login.setCpf(FormLogin.jCampoLCPF.getText());
+        login.setEmail(FormLogin.jCampoLEmail.getText());
         login.setSenha(String.valueOf(FormLogin.jCampoLSenha.getPassword()));
 
         idCliente = logindao.ValidarLogin(login);

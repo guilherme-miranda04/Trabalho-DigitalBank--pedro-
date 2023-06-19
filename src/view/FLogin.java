@@ -30,12 +30,12 @@ public class FLogin extends javax.swing.JFrame {
     private void initComponents() {
 
         jBotLEntrar = new javax.swing.JButton();
-        jCampoLCPF = new javax.swing.JFormattedTextField();
         jTxtLCPF = new javax.swing.JLabel();
         jTxtLSenha = new javax.swing.JLabel();
         jCampoLSenha = new javax.swing.JPasswordField();
         jBotLCConta = new javax.swing.JButton();
         jTxtLLogo = new javax.swing.JLabel();
+        jCampoLEmail = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(0, 0, 0));
@@ -54,18 +54,7 @@ public class FLogin extends javax.swing.JFrame {
             }
         });
 
-        try {
-            jCampoLCPF.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###.###.###-##")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        jCampoLCPF.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jCampoLCPFActionPerformed(evt);
-            }
-        });
-
-        jTxtLCPF.setText("CPF:");
+        jTxtLCPF.setText("Email:");
 
         jTxtLSenha.setText("Senha:");
 
@@ -92,20 +81,20 @@ public class FLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jBotLCConta, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jBotLEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
                         .addGap(65, 65, 65)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jTxtLCPF)
                             .addComponent(jTxtLSenha))
                         .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jCampoLCPF, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
-                            .addComponent(jCampoLSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(143, 143, 143)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jBotLCConta, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jBotLEntrar, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(65, 65, 65))
+                            .addComponent(jCampoLSenha, javax.swing.GroupLayout.DEFAULT_SIZE, 218, Short.MAX_VALUE)
+                            .addComponent(jCampoLEmail))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addGap(131, 131, 131)
                 .addComponent(jTxtLLogo)
@@ -116,10 +105,10 @@ public class FLogin extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGap(92, 92, 92)
                 .addComponent(jTxtLLogo)
-                .addGap(84, 84, 84)
+                .addGap(81, 81, 81)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jCampoLCPF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtLCPF))
+                    .addComponent(jTxtLCPF)
+                    .addComponent(jCampoLEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCampoLSenha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -131,8 +120,6 @@ public class FLogin extends javax.swing.JFrame {
                 .addGap(145, 145, 145))
         );
 
-        jCampoLCPF.getAccessibleContext().setAccessibleName("");
-
         pack();
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -140,10 +127,6 @@ public class FLogin extends javax.swing.JFrame {
     private void jBotLEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotLEntrarActionPerformed
         this.dispose();
     }//GEN-LAST:event_jBotLEntrarActionPerformed
-
-    private void jCampoLCPFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoLCPFActionPerformed
-        
-    }//GEN-LAST:event_jCampoLCPFActionPerformed
 
     private void jCampoLSenhaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCampoLSenhaActionPerformed
         
@@ -200,7 +183,7 @@ public class FLogin extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jBotLCConta;
     public javax.swing.JButton jBotLEntrar;
-    public javax.swing.JFormattedTextField jCampoLCPF;
+    public javax.swing.JTextField jCampoLEmail;
     public javax.swing.JPasswordField jCampoLSenha;
     private javax.swing.JLabel jTxtLCPF;
     private javax.swing.JLabel jTxtLLogo;

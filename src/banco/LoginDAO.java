@@ -25,7 +25,7 @@ public class LoginDAO extends ConexaoBanco {
         ResultSet rs = null;
         
         // Seleciona do Banco Clientes a informação *CPF* //
-        String sql = "select * from cliente where cpf = '" + login.getCpf()+"'";
+        String sql = "select * from cliente where cpf = '" + login.getEmail()+"'";
         try {
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();

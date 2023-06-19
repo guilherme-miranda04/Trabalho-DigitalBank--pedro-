@@ -16,7 +16,7 @@ import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.table.DefaultTableModel;
-import prbancodigital.PrBancoDigital;
+import prbancodigital.PrControleFinanceiro;
 
 /**
  *
@@ -69,6 +69,8 @@ public class FPrincipal extends javax.swing.JFrame {
         jCampoPDesc = new javax.swing.JTextArea();
         jTxtPDesc = new javax.swing.JLabel();
         jBotPConcluido = new javax.swing.JButton();
+        jTxtPOpcao1 = new javax.swing.JLabel();
+        jBoxPCategoria = new javax.swing.JComboBox<>();
         txtCli = new javax.swing.JLabel();
         txtData = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -253,7 +255,7 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         });
 
-        jTxtPOpcao.setText("Selecione opção:");
+        jTxtPOpcao.setText("Status:");
 
         jTxtPValor.setText("Valor em R$:");
 
@@ -270,6 +272,15 @@ public class FPrincipal extends javax.swing.JFrame {
             }
         });
 
+        jTxtPOpcao1.setText("Categoria:");
+
+        jBoxPCategoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Alimentação", "Compras", "Casa", "Saúde", "Lazer", "Transporte", "Outros" }));
+        jBoxPCategoria.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBoxPCategoriaActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -281,21 +292,33 @@ public class FPrincipal extends javax.swing.JFrame {
                     .addComponent(jTxtPValor)
                     .addComponent(jTxtPDesc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jBotPConcluido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCampoPValor, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jBoxPOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jBotPConcluido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jBoxPOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTxtPOpcao1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBoxPCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(jCampoPValor))
+                .addGap(77, 77, 77))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jBoxPOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtPOpcao))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBoxPCategoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtPOpcao1))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jBoxPOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jTxtPOpcao)))
+                .addGap(12, 12, 12)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCampoPValor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTxtPValor))
@@ -321,7 +344,7 @@ public class FPrincipal extends javax.swing.JFrame {
 
             },
             new String [] {
-                "Data", "Valor", "Tipo", "Descrição"
+                "Valor", "Descrição", "Categoria", "Status"
             }
         ) {
             boolean[] canEdit = new boolean [] {
@@ -347,23 +370,21 @@ public class FPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(35, 35, 35)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jTxtPOLA)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTxtPUser)
-                        .addGap(53, 53, 53)
-                        .addComponent(txtCli)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addGap(35, 35, 35))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jBotaoSair)
-                .addGap(15, 15, 15))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jBotaoSair)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(layout.createSequentialGroup()
+                            .addComponent(jTxtPOLA)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                            .addComponent(jTxtPUser)
+                            .addGap(53, 53, 53)
+                            .addComponent(txtCli)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 82, Short.MAX_VALUE)
+                            .addComponent(txtData, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 353, Short.MAX_VALUE)
+                        .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                .addContainerGap(35, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -412,6 +433,8 @@ public class FPrincipal extends javax.swing.JFrame {
     private void jBotPConcluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotPConcluidoActionPerformed
         // TODO add your handling code here:
         Object valor;
+        Object categoriaItem = jBoxPCategoria.getSelectedItem();
+        String categoria = (String) categoriaItem;
         Object opcao = jBoxPOpcao.getSelectedItem();
         Movimentacao movimentacao = new Movimentacao();
         float valorTran = Float.valueOf(jCampoPValor.getText()).floatValue();
@@ -424,7 +447,7 @@ public class FPrincipal extends javax.swing.JFrame {
         } else if (opcao == "Receber") {
             tipo = "C";
         }
-        movimentacao = new Movimentacao(0, new Date(), valorTran, tipo, jCampoPDesc.getText(), idCliente);
+        movimentacao = new Movimentacao(0, valorTran, categoria, tipo, jCampoPDesc.getText(), idCliente);
         srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao, id);
         this.limparTela();
 
@@ -438,12 +461,12 @@ public class FPrincipal extends javax.swing.JFrame {
         tbModel.setRowCount(0);
         for (int i = 0; i < listamovi.size(); i++) {
             Object id = listamovi.get(i).getId();
-            Object datatrans = listamovi.get(i).getDataTran();
             Object valor = listamovi.get(i).getValorTran();
-            Object tipo = listamovi.get(i).getDebCre();
             Object descricaotrans = listamovi.get(i).getDescTran();
+            Object categoria = listamovi.get(i).getCategoria();
+            Object tipo = listamovi.get(i).getDebCre();
             //String cliente_id = clientes.get(i).getTelefone2();
-            Object[] data = {datatrans, valor, tipo, descricaotrans};
+            Object[] data = {valor, descricaotrans, categoria, tipo };
 //            if (listamovi.get(i).getDebCre() == "C") {
 //                jExtratoTable.setForeground(Color.RED);
 //            }
@@ -497,12 +520,12 @@ public class FPrincipal extends javax.swing.JFrame {
         tbModel.setRowCount(0);
         for (int i = 0; i < listamovi.size(); i++) {
             Object id = listamovi.get(i).getId();
-            Object datatrans = LocalDate.parse(listamovi.get(i).getDataTran().toString()).format(dateTimeFormatter);
             Object valor = listamovi.get(i).getValorTran();
-            Object tipo = listamovi.get(i).getDebCre();
             Object descricaotrans = listamovi.get(i).getDescTran();
+            Object categoria = listamovi.get(i).getCategoria();
+            Object tipo = listamovi.get(i).getDebCre();
             //String cliente_id = clientes.get(i).getTelefone2();
-            Object[] datab = {datatrans, valor, tipo, descricaotrans};
+            Object[] datab = {valor, descricaotrans, categoria, tipo };
             /** 
              *  Este procedimento ia fazer a alteração da coloração do texto conforme o tipo buscado no banco de dados e ia imprimir isso no extrato
              *  Exemplo: "Débito (vermelho) / Crédito (verde) //
@@ -526,9 +549,13 @@ public class FPrincipal extends javax.swing.JFrame {
          * @Dispose - Fecha as janelas atribuidas a aquela janela
          */
         this.dispose();
-        PrBancoDigital.main(args);
+        PrControleFinanceiro.main(args);
 
     }//GEN-LAST:event_jBotaoSairActionPerformed
+
+    private void jBoxPCategoriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxPCategoriaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBoxPCategoriaActionPerformed
 
     /**
      * @param args the command line arguments
@@ -567,6 +594,7 @@ public class FPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jBotPConcluido;
     private javax.swing.JButton jBotaoSair;
+    public javax.swing.JComboBox<String> jBoxPCategoria;
     public javax.swing.JComboBox<String> jBoxPOpcao;
     public javax.swing.JTextArea jCampoPDesc;
     public javax.swing.JFormattedTextField jCampoPValor;
@@ -593,6 +621,7 @@ public class FPrincipal extends javax.swing.JFrame {
     private javax.swing.JLabel jTxtPDesc;
     private javax.swing.JLabel jTxtPOLA;
     private javax.swing.JLabel jTxtPOpcao;
+    private javax.swing.JLabel jTxtPOpcao1;
     public javax.swing.JLabel jTxtPSaldo;
     public javax.swing.JLabel jTxtPUser;
     private javax.swing.JLabel jTxtPValor;
