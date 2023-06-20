@@ -292,6 +292,8 @@
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jCampoCCEP" min="-2" pref="76" max="-2" attributes="0"/>
+                                  <EmptySpace max="-2" attributes="0"/>
+                                  <Component id="jBotCConsultar" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
@@ -338,6 +340,7 @@
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jCampoCCEP" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="jTxtCCEP" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jBotCConsultar" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="10" max="32767" attributes="0"/>
               </Group>
@@ -459,6 +462,17 @@
         <Component class="javax.swing.JTextField" name="jCampoPais">
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jCampoPaisActionPerformed"/>
+          </Events>
+          <AuxValues>
+            <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>
+          </AuxValues>
+        </Component>
+        <Component class="javax.swing.JButton" name="jBotCConsultar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Consultar"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jBotCConsultarActionPerformed"/>
           </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_VariableModifier" type="java.lang.Integer" value="1"/>

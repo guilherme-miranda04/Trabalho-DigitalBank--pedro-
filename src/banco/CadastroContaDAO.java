@@ -21,8 +21,8 @@ public class CadastroContaDAO extends ConexaoBanco {
         Connection con = getConexao();
         SimpleDateFormat sdf = new java.text.SimpleDateFormat("yyyy-MM-dd");
         // Seleciona do Banco Clientes a informação *CPF* //
-        String sqlEnd = "insert into endereco (ID, estado, cidade, rua, cep, numRua) values (?,?,?,?,?,?)";
-        String sqlCliente = "insert into cliente (ID, nome, cpf, dataNasc, sexo, telefone, email, senha, ENDERECO_ID) values (?,?,?,?,?,?,?,?,?)";
+        String sqlEnd = "insert into endereco (ID, cidade, estado, numRua, rua, cep, bairro) values (?,?,?,?,?,?,?)";
+        String sqlCliente = "insert into cliente (ID, nome, email, dataNasc, sexo, senha, ENDERECO_ID) values (?,?,?,?,?,?,?)";
 
         try {
             PreparedStatement psE = con.prepareStatement(sqlEnd,Statement.RETURN_GENERATED_KEYS);
@@ -31,11 +31,12 @@ public class CadastroContaDAO extends ConexaoBanco {
             // Inserção dados Endereço //
             psE.setInt(1, 0);
             getID = cadcliente.getEnderecoID();
-            psE.setString(2, cadcliente.getEndereco().getEstado());
-            psE.setString(3, cadcliente.getEndereco().getCidade());
-            psE.setString(4, cadcliente.getEndereco().getRua());
-            psE.setString(5, cadcliente.getEndereco().getCep());
-            psE.setString(6, cadcliente.getEndereco().getNumRua());
+            psE.setString(2, cadcliente.getEndereco().getCidade());
+            psE.setString(3, cadcliente.getEndereco().getEstado());
+            psE.setString(4, cadcliente.getEndereco().getNumRua());
+            psE.setString(5, cadcliente.getEndereco().getRua());
+            psE.setString(6, cadcliente.getEndereco().getCep());
+            psE.setString(7, cadcliente.getEndereco().getBairro());            
             psE.executeUpdate();
              ResultSet generatedKeys = psE.getGeneratedKeys();
                 if (generatedKeys.next()) {
@@ -45,12 +46,12 @@ public class CadastroContaDAO extends ConexaoBanco {
             // Inserção dados Pessoa //
             psP.setInt(1, 0);
             psP.setString(2, cadcliente.getNome());
+            psP.setString(3, cadcliente.getEmail());
             String date = sdf.format(cadcliente.getDataNasc());
             psP.setString(4, date);
             psP.setString(5, cadcliente.getSexo());
-            psP.setString(7, cadcliente.getEmail());
-            psP.setString(8, cadcliente.getSenha());
-            psP.setInt(9, getID);
+            psP.setString(6, cadcliente.getSenha());
+            psP.setInt(7, getID);
             psP.executeUpdate();
             
             close();

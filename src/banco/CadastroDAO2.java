@@ -11,21 +11,21 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class CadastroDAO2 {
+
     private final Connection connection;
 
     public CadastroDAO2(Connection connection) {
         this.connection = connection;
     }
-    
-    public void insert(Cliente cliente) throws SQLException{
-        String sqlCliente = "insert into cliente (ID, nome, cpf, dataNasc, sexo, "
-                + "telefone, email, senha, ENDERECO_ID) values (?,"+cliente.getNome()+","+cliente.getDataNasc()+","
-                +","+cliente.getSexo()+","+cliente.getEmail()+","+cliente.getSenha()+","+cliente.getEnderecoID()+")";
+
+    public void insert(Cliente cliente) throws SQLException {
+        String sqlCliente = "insert into cliente (ID, nome, email, dataNasc, sexo, senha, ENDERECO_ID)"
+                + "values (?," + cliente.getNome() + "," + cliente.getEmail() + "," + cliente.getDataNasc()
+                + "," + cliente.getSexo() + "," + cliente.getSenha() + "," + cliente.getEnderecoID() + ")";
         PreparedStatement statement = connection.prepareStatement(sqlCliente);
         statement.execute();
 
         connection.close();
 
-        
     }
 }
