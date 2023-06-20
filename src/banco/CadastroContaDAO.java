@@ -45,11 +45,9 @@ public class CadastroContaDAO extends ConexaoBanco {
             // Inserção dados Pessoa //
             psP.setInt(1, 0);
             psP.setString(2, cadcliente.getNome());
-            psP.setString(3, cadcliente.getCpf());
             String date = sdf.format(cadcliente.getDataNasc());
             psP.setString(4, date);
             psP.setString(5, cadcliente.getSexo());
-            psP.setString(6, cadcliente.getTelefone());
             psP.setString(7, cadcliente.getEmail());
             psP.setString(8, cadcliente.getSenha());
             psP.setInt(9, getID);

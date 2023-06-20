@@ -420,7 +420,6 @@ public class FCadastroConta extends javax.swing.JFrame {
         cliente.setNome(jCampoCNome.getText());
         cliente.setDataNasc(data); // retornando um valor null
         cliente.setSexo((String) jBoxCSexo.getSelectedItem());
-        cliente.setTelefone(jCampoCFone.getText());
         cliente.setEmail(jCampoCEmail.getText());
         cliente.setSenha(jCampoCSenha.getText());
 

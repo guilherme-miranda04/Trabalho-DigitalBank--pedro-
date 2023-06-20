@@ -447,7 +447,7 @@ public class FPrincipal extends javax.swing.JFrame {
         } else if (opcao == "Receber") {
             tipo = "C";
         }
-        movimentacao = new Movimentacao(0, valorTran, categoria, tipo, jCampoPDesc.getText(), idCliente);
+        movimentacao = new Movimentacao(0, new Date(), valorTran, categoria, tipo, jCampoPDesc.getText(), idCliente);
         srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao, id);
         this.limparTela();
 
@@ -461,12 +461,13 @@ public class FPrincipal extends javax.swing.JFrame {
         tbModel.setRowCount(0);
         for (int i = 0; i < listamovi.size(); i++) {
             Object id = listamovi.get(i).getId();
+            Object datatrans = listamovi.get(i).getDataTran();
             Object valor = listamovi.get(i).getValorTran();
             Object descricaotrans = listamovi.get(i).getDescTran();
             Object categoria = listamovi.get(i).getCategoria();
             Object tipo = listamovi.get(i).getDebCre();
             //String cliente_id = clientes.get(i).getTelefone2();
-            Object[] data = {valor, descricaotrans, categoria, tipo };
+            Object[] data = {datatrans, valor, descricaotrans, categoria, tipo };
 //            if (listamovi.get(i).getDebCre() == "C") {
 //                jExtratoTable.setForeground(Color.RED);
 //            }
@@ -520,12 +521,13 @@ public class FPrincipal extends javax.swing.JFrame {
         tbModel.setRowCount(0);
         for (int i = 0; i < listamovi.size(); i++) {
             Object id = listamovi.get(i).getId();
+            Object datatrans = LocalDate.parse(listamovi.get(i).getDataTran().toString()).format(dateTimeFormatter);
             Object valor = listamovi.get(i).getValorTran();
             Object descricaotrans = listamovi.get(i).getDescTran();
             Object categoria = listamovi.get(i).getCategoria();
             Object tipo = listamovi.get(i).getDebCre();
             //String cliente_id = clientes.get(i).getTelefone2();
-            Object[] datab = {valor, descricaotrans, categoria, tipo };
+            Object[] datab = {datatrans, valor, descricaotrans, categoria, tipo };
             /** 
              *  Este procedimento ia fazer a alteração da coloração do texto conforme o tipo buscado no banco de dados e ia imprimir isso no extrato
              *  Exemplo: "Débito (vermelho) / Crédito (verde) //

@@ -9,25 +9,30 @@ import java.util.ArrayList;
 
 /**
  *
- * @author hercilio.neto1
+ * @author guilherme.miranda1
  */
 public class Endereco {
 
     private int id;
-    private String estado;
     private String cidade;
+    private String pais;
+    private String numRua;
+    private String estado;
     private String rua;
     private String cep;
-    private String numRua;
+    private String bairro;
 
     private ArrayList<Endereco> listaEndereco = new ArrayList<Endereco>();
 
-    public Endereco(String estado, String cidade, String rua, String cep, String numRua) {
-        this.estado = estado;
+    public Endereco(String cidade, String pais, String numRua, String estado, String rua, String cep, String bairro) {
         this.cidade = cidade;
+        this.pais = pais;
+        this.numRua = numRua;
+        this.estado = estado;
         this.rua = rua;
         this.cep = cep;
-        this.numRua = numRua;
+        this.bairro = bairro;
+        
     }
 
     public int getId() {
@@ -38,20 +43,36 @@ public class Endereco {
         this.id = id;
     }
 
-    public String getEstado() {
-        return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
     public String getCidade() {
         return cidade;
     }
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
+
+    public String getNumRua() {
+        return numRua;
+    }
+
+    public void setNumRua(String numRua) {
+        this.numRua = numRua;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
     }
 
     public String getRua() {
@@ -70,12 +91,12 @@ public class Endereco {
         this.cep = cep;
     }
 
-    public String getNumRua() {
-        return numRua;
+    public String getBairro() {
+        return bairro;
     }
 
-    public void setNumRua(String numRua) {
-        this.numRua = numRua;
+    public void setBairro(String bairro) {
+        this.bairro = bairro;
     }
 
     public ArrayList<Endereco> getListaEndereco() {

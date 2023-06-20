@@ -63,6 +63,7 @@ public class MovimentacaoDAO extends ConexaoBanco {
                         rs.getInt("ID"),
                         rs.getDate("dataTran"),
                         rs.getFloat("valorTran"),
+                        rs.getString("categoria"),
                         rs.getString("debCre"),
                         rs.getString("descTran"),
                         rs.getInt("CLIENTE_ID"));
