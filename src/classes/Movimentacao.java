@@ -11,18 +11,20 @@ public class Movimentacao {
     private int id;
     private Date dataTran;
     private Float valorTran;
-    private String debCre, descTran;
+    private String debCre, descTran, categoria;
     private int idCli;
 
-    public Movimentacao(int id, Date dataTran, Float valorTran, String debCre, String descTran, int idCli) {
+    public Movimentacao(int id, Date dataTran, Float valorTran, String categoria, String debCre, String descTran, int idCli) {
         this.id = id;
         this.dataTran = dataTran;
         this.valorTran = valorTran;
+        this.categoria = categoria;
         this.debCre = debCre;
         this.descTran = descTran;
         this.idCli = idCli;
     }
-
+    
+    
     public Movimentacao() {
     }
 
@@ -40,6 +42,14 @@ public class Movimentacao {
         this.id = id;
     }
 
+    public Date getDataTran() {
+        return dataTran;
+    }
+
+    public void setDataTran(Date dataTran) {
+        this.dataTran = dataTran;
+    }
+    
     public String getDebCre() {
         return debCre;
     }
@@ -56,14 +66,14 @@ public class Movimentacao {
         this.descTran = descTran;
     }
 
-    public Date getDataTran() {
-        return dataTran;
+    public String getCategoria() {
+        return categoria;
     }
 
-    public void setDataTran(Date dataTran) {
-        this.dataTran = dataTran;
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
     }
-
+    
     public Float getValorTran() {
         return valorTran;
     }

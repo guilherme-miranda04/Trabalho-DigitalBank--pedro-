@@ -16,10 +16,8 @@ public class Cliente {
 
     private int id;
     private String nome;
-    private String cpf;
     private Date dataNasc;
     private String sexo;
-    private String telefone;
     private String email;
     private String senha;
     private Endereco endereco;
@@ -30,37 +28,32 @@ public class Cliente {
 
     public Cliente() {
         if (endereco == null) {
-            endereco = new Endereco(sexo, nome, cpf, cpf, nome);
+            endereco = new Endereco("", "", "", "", "", "", "");
         }
     }
 
-    public Cliente(String telefone, String email, String senha) {
-        this.telefone = telefone;
+    public Cliente(String email, String senha) {
         this.email = email;
         this.senha = senha;
         if (endereco == null) {
-            endereco = new Endereco(email, email, cpf, cpf, nome);
+            endereco = new Endereco("", "", "", "", "", "", "");
         }
     }
 
-    public Cliente(int id, String nome, String cpf, Date dataNasc, String sexo, String telefone, String email, String senha, int enderecoID) {
+    public Cliente(int id, String nome, Date dataNasc, String sexo, String email, String senha, int enderecoID) {
         this.id = id;
         this.nome = nome;
-        this.cpf = cpf;
         this.dataNasc = dataNasc;
         this.sexo = sexo;
-        this.telefone = telefone;
         this.email = email;
         this.senha = senha;
         this.enderecoID = enderecoID;
     }
 
-    public Cliente(String nome, String cpf, Date dataNasc, String sexo, String telefone, String email, String senha, int enderecoID) {
+    public Cliente(String nome, Date dataNasc, String sexo, String email, String senha, int enderecoID) {
         this.nome = nome;
-        this.cpf = cpf;
         this.dataNasc = dataNasc;
         this.sexo = sexo;
-        this.telefone = telefone;
         this.email = email;
         this.senha = senha;
         this.enderecoID = enderecoID;
@@ -82,14 +75,6 @@ public class Cliente {
         this.nome = nome;
     }
 
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
     public Date getDataNasc() {
         return dataNasc;
     }
@@ -104,14 +89,6 @@ public class Cliente {
 
     public void setSexo(String sexo) {
         this.sexo = sexo;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getEmail() {

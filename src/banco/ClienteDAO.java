@@ -26,16 +26,13 @@ public class ClienteDAO extends ConexaoBanco {
                 cpf = rs.getString("cpf");
                 Date dataNasc = rs.getDate("dataNasc");
                 String sexo = rs.getString("sexo");
-                String telefone = rs.getString("telefone");
                 String email = rs.getString("email");
                 int enderecoID = rs.getInt("ENDERECO_ID");
 
                 cliente.setId(id);
                 cliente.setNome(nome);
-                cliente.setCpf(cpf);
                 cliente.setDataNasc(dataNasc);
                 cliente.setSexo(sexo);
-                cliente.setTelefone(telefone);
                 cliente.setEmail(email);
                 cliente.setEnderecoID(enderecoID);
 

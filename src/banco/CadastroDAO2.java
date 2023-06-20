@@ -19,8 +19,8 @@ public class CadastroDAO2 {
     
     public void insert(Cliente cliente) throws SQLException{
         String sqlCliente = "insert into cliente (ID, nome, cpf, dataNasc, sexo, "
-                + "telefone, email, senha, ENDERECO_ID) values (?,"+cliente.getNome()+","+cliente.getCpf()+","+cliente.getDataNasc()+","
-                +","+cliente.getSexo()+","+cliente.getTelefone()+","+cliente.getEmail()+","+cliente.getSenha()+","+cliente.getEnderecoID()+")";
+                + "telefone, email, senha, ENDERECO_ID) values (?,"+cliente.getNome()+","+cliente.getDataNasc()+","
+                +","+cliente.getSexo()+","+cliente.getEmail()+","+cliente.getSenha()+","+cliente.getEnderecoID()+")";
         PreparedStatement statement = connection.prepareStatement(sqlCliente);
         statement.execute();
 

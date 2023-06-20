@@ -8,7 +8,7 @@ import view.FLogin;
  * @author guilherme.miranda1
  */
 
-public class PrBancoDigital {
+public class PrControleFinanceiro {
     public static void main(String[] args) {
         FLogin FormLogin = new FLogin();
 
