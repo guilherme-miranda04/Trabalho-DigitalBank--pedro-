@@ -14,6 +14,11 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import prbancodigital.PrControleFinanceiro;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
 
 /**
  *
@@ -68,6 +73,7 @@ public class FCadastroConta extends javax.swing.JFrame {
         jCampoBairro = new javax.swing.JTextField();
         jTxtCCEP1 = new javax.swing.JLabel();
         jCampoPais = new javax.swing.JTextField();
+        jBotCConsultar = new javax.swing.JButton();
         jLabel12 = new javax.swing.JLabel();
         jBotCCadastrar = new javax.swing.JButton();
         jCBotaoSair = new javax.swing.JButton();
@@ -246,6 +252,13 @@ public class FCadastroConta extends javax.swing.JFrame {
             }
         });
 
+        jBotCConsultar.setText("Consultar");
+        jBotCConsultar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jBotCConsultarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -274,6 +287,8 @@ public class FCadastroConta extends javax.swing.JFrame {
                                 .addComponent(jCampoBairro, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(jCampoCCEP, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jBotCConsultar)
                                 .addGap(0, 0, Short.MAX_VALUE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jTxtCUF)
@@ -309,7 +324,8 @@ public class FCadastroConta extends javax.swing.JFrame {
                 .addGap(12, 12, 12)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jCampoCCEP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTxtCCEP))
+                    .addComponent(jTxtCCEP)
+                    .addComponent(jBotCConsultar))
                 .addContainerGap(10, Short.MAX_VALUE))
         );
 
@@ -408,6 +424,57 @@ public class FCadastroConta extends javax.swing.JFrame {
         return dataNC;
     }
 
+    public void consultaViaCep(String cep) {
+        try {
+            URL url = new URL("https://viacep.com.br/ws/" + cep + "/json/");
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+            String line;
+            StringBuilder response = new StringBuilder();
+
+            while ((line = reader.readLine()) != null) {
+                response.append(line);
+            }
+
+            reader.close();
+            connection.disconnect();
+
+            String respostaJson = response.toString(); // Armazena a resposta JSON do ViaCEP
+
+            // Realiza o parsing da resposta JSON e atribui os dados ao objeto Cliente
+            cliente.getEndereco().setCidade(jsonObject.getString("localidade"));
+            cliente.getEndereco().setEstado(obterValorCampoJson(respostaJson, "uf"));
+            cliente.getEndereco().setPais(obterValorCampoJson(respostaJson, "pais"));
+            cliente.getEndereco().setRua(obterValorCampoJson(respostaJson, "logradouro"));
+            cliente.getEndereco().setNumRua(obterValorCampoJson(respostaJson, "numero"));
+
+            // Exibe os dados do cliente
+            jCampoCidade.setText(cliente.getEndereco().getCidade());
+            jBoxCUF.setSelectedItem(cliente.getEndereco().getEstado());
+            jCampoPais.setText(cliente.getEndereco().getPais());
+            jCampoCRua.setText(cliente.getEndereco().getRua());
+            jCampoCNum.setText(cliente.getEndereco().getNumRua());
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    private static String obterValorCampoJson(String json, String campo) {
+        int campoIndex = json.indexOf("\"" + campo + "\":");
+        if (campoIndex != -1) {
+            int valorInicio = campoIndex + campo.length() + 3; // 3 caracteres extras: ":
+            int valorFim = json.indexOf("\"", valorInicio);
+            if (valorFim != -1) {
+                return json.substring(valorInicio, valorFim);
+            }
+        }
+        return "";
+    }
+
     private void jBotCCadastrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotCCadastrarActionPerformed
 
         CadastroContaDAO ccDao = new CadastroContaDAO();
@@ -424,11 +491,12 @@ public class FCadastroConta extends javax.swing.JFrame {
         cliente.setSenha(jCampoCSenha.getText());
 
         // Salva as informações de endereço no Getters and Setters
+        /*cliente.getEndereco().setCidade(jCampoCidade.getText());
         cliente.getEndereco().setEstado((String) jBoxCUF.getSelectedItem());
-        cliente.getEndereco().setCidade(jCampoCidade.getText());
+        cliente.getEndereco().setPais(jCampoPais.getText());
         cliente.getEndereco().setRua(jCampoCRua.getText());
         cliente.getEndereco().setNumRua(jCampoCNum.getText());
-        cliente.getEndereco().setCep(jCampoCCEP.getText());
+        cliente.getEndereco().setCep(jCampoCCEP.getText());*/
         ccDao.InserirDadosBanco(cliente);
 
         String[] args = null;
@@ -462,6 +530,11 @@ public class FCadastroConta extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jCampoPaisActionPerformed
 
+    private void jBotCConsultarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotCConsultarActionPerformed
+        String cep = jCampoCCEP.getText();
+        consultaViaCep(cep);
+    }//GEN-LAST:event_jBotCConsultarActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -479,13 +552,17 @@ public class FCadastroConta extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(FCadastroConta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FCadastroConta.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(FCadastroConta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FCadastroConta.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(FCadastroConta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FCadastroConta.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(FCadastroConta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(FCadastroConta.class
+                    .getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
@@ -500,6 +577,7 @@ public class FCadastroConta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton jBotCCadastrar;
+    public javax.swing.JButton jBotCConsultar;
     public javax.swing.JComboBox<String> jBoxCSexo;
     public javax.swing.JComboBox<String> jBoxCUF;
     private javax.swing.JButton jCBotaoSair;
