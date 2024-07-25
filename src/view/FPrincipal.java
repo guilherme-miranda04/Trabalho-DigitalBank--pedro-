@@ -7,30 +7,31 @@ package view;
 
 import banco.MovimentacaoDAO;
 import classes.Movimentacao;
-import banco.ClienteDAO;
-import banco.SimpleTableModel;
-import classes.Cliente;
+import classes.Saldo;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.FormatStyle;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author guilherme.miranda1
  */
 public class FPrincipal extends javax.swing.JFrame {
 
-    /**
-     * Creates new form FPrincipal
-     */
     public FPrincipal() {
         initComponents();
     }
-    private Date data;
-    Movimentacao movimentacao = null;
+
+    ArrayList<Movimentacao> listamovi = new ArrayList<Movimentacao>();
+    Movimentacao movimentacao = new Movimentacao();
     MovimentacaoDAO srvMovimentacao = new MovimentacaoDAO();
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -192,6 +193,11 @@ public class FPrincipal extends javax.swing.JFrame {
         setFocusCycleRoot(false);
         setMinimumSize(new java.awt.Dimension(395, 600));
         setSize(new java.awt.Dimension(395, 600));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder("Saldo atual da Conta"));
 
@@ -275,9 +281,7 @@ public class FPrincipal extends javax.swing.JFrame {
                     .addComponent(jTxtPDesc))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jBotPConcluido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jBotPConcluido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jCampoPValor, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jBoxPOpcao, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -313,13 +317,10 @@ public class FPrincipal extends javax.swing.JFrame {
 
         jExtratoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Data", "Valor", "Tipo", "Descrição"
             }
         ));
         jScrollPane3.setViewportView(jExtratoTable);
@@ -335,10 +336,10 @@ public class FPrincipal extends javax.swing.JFrame {
                         .addComponent(jTxtPOLA)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jTxtPUser)
-                        .addGap(100, 100, 100)
-                        .addComponent(txtData)
-                        .addGap(45, 45, 45)
-                        .addComponent(txtCli))
+                        .addGap(53, 53, 53)
+                        .addComponent(txtCli)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtData))
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
@@ -387,10 +388,10 @@ public class FPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField6ActionPerformed
 
     //PRIVATE VOID INSERIR(){}
-    private void BuscarSaldo(int IDCLIE){
+    private void BuscarSaldo(int IDCLIE) {
         //    COMPSALDODATELA := VerificacaoSaldo}
     }
-    
+
     private void jBotPConcluidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBotPConcluidoActionPerformed
         // TODO add your handling code here:
         Object valor;
@@ -398,54 +399,63 @@ public class FPrincipal extends javax.swing.JFrame {
         Movimentacao movimentacao = new Movimentacao();
         float valorTran = Float.valueOf(jCampoPValor.getText()).floatValue();
         int idCliente = Integer.parseInt(txtCli.getText());
-        
-        if (jBoxPOpcao.getSelectedIndex() < 0){
-            if (opcao == "Enviar"){
-                movimentacao = new Movimentacao(0,new Date(), valorTran,"D",jCampoPDesc.getText(),idCliente); 
-                srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao);
-            }else if (opcao == "Receber"){
-                movimentacao = new Movimentacao(0,new Date(), valorTran,"C",jCampoPDesc.getText(),idCliente);
-                srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao);
-        }
-            
+
+        if (jBoxPOpcao.getSelectedIndex() < 0) {
+            int id = Integer.parseInt(txtCli.getText());
+            String tipo = "";
+            if (opcao == "Enviar") {
+                tipo = "D";
+            } else if (opcao == "Receber") {
+                tipo = "C"; 
+            }
+            movimentacao = new Movimentacao(0, new Date(), valorTran, tipo, jCampoPDesc.getText(), idCliente);
+            srvMovimentacao.InserirDadosBancoMovimentacao(movimentacao,id);
+
         } else {
             this.limparTela();
-        } 
+        }
         this.limparTela();
+        
     }//GEN-LAST:event_jBotPConcluidoActionPerformed
 
-    private void limparTela(){
-       /* try {       
+    private void limparTela() {
+        /* try {       
             this.atualizarListaEquipamento();
         } catch (SQLException ex) {
             Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
         }
-    */
-       jBoxPOpcao.setSelectedIndex(0);
-       jCampoPDesc.setText("");
-       jCampoPValor.setText("");
+         */
+        jBoxPOpcao.setSelectedIndex(0);
+        jCampoPDesc.setText("");
+        jCampoPValor.setText("");
+        DefaultTableModel tbModel = (DefaultTableModel) jExtratoTable.getModel();
+        tbModel.setRowCount(0);
+        for (int i = 0; i < listamovi.size(); i++) {
+            Object id = listamovi.get(i).getId();
+            Object datatrans = listamovi.get(i).getDataTran();
+            Object valor  = listamovi.get(i).getValorTran();
+            Object tipo = listamovi.get(i).getDebCre();
+            Object descricaotrans = listamovi.get(i).getDescTran();
+            //String cliente_id = clientes.get(i).getTelefone2();
+            Object[] data = {datatrans,valor,tipo, descricaotrans};
+            tbModel.addRow(data);
+        }
+        int id = Integer.parseInt(txtCli.getText());
+        Saldo sa = new Saldo();
+        float saldo = sa.VerificacaoSaldo(id);
+        jTxtPSaldo.setText(saldo+"");
+    }
+
+    public void carregarTela() throws SQLException {
+        int idCliente = Integer.parseInt(txtCli.getText());
+        MovimentacaoDAO srv = new MovimentacaoDAO();
 
     }
 
-public void carregarTela() throws SQLException{
-            int idCliente = Integer.parseInt(txtCli.getText());
-            MovimentacaoDAO srv = new MovimentacaoDAO();
-            ArrayList dados = srv.getEquipamentoByQuery(idCliente);
-            String [] colunas = new String[] {"Cód. Equip.",
-                                              "Equipamento",
-                                              "Cód. Perif.",
-                                              "Periférico",
-                                              "Estato Perif."                                       
-                                              };
-           
-            SimpleTableModel modelo = new SimpleTableModel(dados, colunas); 
-            jExtratoTable.setModel(modelo);
-    }
 
- 
     private void jBoxPOpcaoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBoxPOpcaoActionPerformed
         // TODO add your handling code here:
-   
+
         //criar movimentafcaoo DAO passando como paremetro a pomvimentacvao e dao faz insert nmo banco
     }//GEN-LAST:event_jBoxPOpcaoActionPerformed
 
@@ -455,9 +465,38 @@ public void carregarTela() throws SQLException{
 
     private void jTxtPSaldoInputMethodTextChanged(java.awt.event.InputMethodEvent evt) {//GEN-FIRST:event_jTxtPSaldoInputMethodTextChanged
         // TODO add your handling code here:
-        
-        
+
+
     }//GEN-LAST:event_jTxtPSaldoInputMethodTextChanged
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        LocalDate localDate = LocalDate.now();
+        DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+        String data = localDate.format(dateTimeFormatter);
+        txtData.setText(data); 
+        txtCli.setVisible(false);
+        try {
+            listamovi = srvMovimentacao.selectMovimentacao(Integer.parseInt(txtCli.getText()));
+        } catch (SQLException ex) {
+            Logger.getLogger(FPrincipal.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        DefaultTableModel tbModel = (DefaultTableModel) jExtratoTable.getModel();
+        tbModel.setRowCount(0);
+        for (int i = 0; i < listamovi.size(); i++) {
+            Object id = listamovi.get(i).getId();
+            Object datatrans = LocalDate.parse(listamovi.get(i).getDataTran().toString()).format(dateTimeFormatter);
+            Object valor  = listamovi.get(i).getValorTran();
+            Object tipo = listamovi.get(i).getDebCre();
+            Object descricaotrans = listamovi.get(i).getDescTran();
+            //String cliente_id = clientes.get(i).getTelefone2();
+            Object[] datab = {datatrans,valor,tipo, descricaotrans};
+            tbModel.addRow(datab);
+        }
+        int id = Integer.parseInt(txtCli.getText());
+        Saldo sa = new Saldo();
+        float saldo = sa.VerificacaoSaldo(id);
+        jTxtPSaldo.setText(saldo+"");
+    }//GEN-LAST:event_formWindowActivated
 
     /**
      * @param args the command line arguments

@@ -5,31 +5,44 @@
  */
 package classes;
 
+import banco.ConexaoBanco;
 import banco.MovimentacaoDAO;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.*;
 import view.FPrincipal;
 
 /**
  *
  * @author guilherme.miranda1
  */
-public class Saldo extends MovimentacaoDAO{
+public class Saldo {
+
     FPrincipal FormPrincipal = new FPrincipal();
-    public Saldo (String saldoA) {
-        
+    private final ConexaoBanco conexao = new ConexaoBanco();
+
+    public Saldo(String saldoA) {
+
         FormPrincipal.jTxtPSaldo(saldoA);
     }
-    public void VerificacaoSaldo(int IdConta) {
-        Connection con = getConexao();
+
+    public Saldo() {
         
-        String sqlsaldo = "select * from VWSALDO where CLIENTE_ID = ?";
-        
-        try{        
-            PreparedStatement psE = con.prepareStatement(sqlsaldo);
-        }catch {
-                
+    }
+
+    public float VerificacaoSaldo(int id) {
+        String sqlsaldo = "select * from VWSALDO where (CLIENTE_ID = " + id + ")";
+        try (Statement st = conexao.getConexao().createStatement();
+                ResultSet rs = st.executeQuery(sqlsaldo)) {
+            if (rs.next()) {
+              float saldo = rs.getFloat("credito.vlre-Debito.vlrs");
+              return saldo;              
+            }
+            return 0;
+        } catch (SQLException e) {
+            return 0;
         }
-        
+        finally{
+            conexao.close();
+        }
+
     }
 }
